@@ -41,14 +41,17 @@ public class Laberinto extends JComponent implements Constantes {
         this.alturaLaberinto = ALTO_CELDAS * TAMANIO_CELDA;
         this.setSize(anchuraLaberinto, alturaLaberinto);
     }
-
     @Override
-    public void paintComponent(Graphics g) {
+    public void update(Graphics g){
         for (int i = 0; i < ANCHO_CELDAS; i++) {
             for (int j = 0; j < ALTO_CELDAS; j++) {
                 celdas[i][j].paintComponent(g);
             }
         }
+    }
+    @Override
+    public void paintComponent(Graphics g) {
+        update(g);
     }
 
     void moverCelda(KeyEvent evento) {
@@ -73,14 +76,12 @@ public class Laberinto extends JComponent implements Constantes {
     }
 
     private void moverCeldaArriba() {
-        if (celdaMovimiento.Y > 0) {
+        if (celdaMovimiento.Y > 0 && celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='O') {
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'V';
             celdaMovimiento.Y = celdaMovimiento.Y - 1;
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'J';
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='O'){
+        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo =='O'){
             JOptionPane.showMessageDialog(null, "Choque");
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='P'){
-            JOptionPane.showMessageDialog(null, "Portal");
         }
     }
 
@@ -89,10 +90,8 @@ public class Laberinto extends JComponent implements Constantes {
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'V';
             celdaMovimiento.Y = celdaMovimiento.Y + 1;
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'J';
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='O'){
+        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y + 1].tipo =='O'){
             JOptionPane.showMessageDialog(null, "Choque");
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='P'){
-            JOptionPane.showMessageDialog(null, "Portal");
         }
     }
 
@@ -101,10 +100,8 @@ public class Laberinto extends JComponent implements Constantes {
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'V';
             celdaMovimiento.X = celdaMovimiento.X - 1;
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'J';
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='O'){
+        }else if(celdas[celdaMovimiento.X - 1][celdaMovimiento.Y].tipo =='O'){
             JOptionPane.showMessageDialog(null, "Choque");
-        }else if(celdas[celdaMovimiento.X][celdaMovimiento.Y - 1].tipo !='P'){
-            JOptionPane.showMessageDialog(null, "Portal");
         }
     }
 
@@ -113,10 +110,8 @@ public class Laberinto extends JComponent implements Constantes {
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'V';
             celdaMovimiento.X = celdaMovimiento.X + 1;
             celdas[celdaMovimiento.X][celdaMovimiento.Y].tipo = 'J';
-        }else if(celdaMovimiento.X < ANCHO_CELDAS - 1 && celdas[celdaMovimiento.X + 1][celdaMovimiento.Y].tipo == 'O'){
+        }else if(celdas[celdaMovimiento.X + 1][celdaMovimiento.Y].tipo == 'O'){
             JOptionPane.showMessageDialog(null, "Choque");
-        }else{
-            JOptionPane.showMessageDialog(null, "Portal");
         }
     }
 }

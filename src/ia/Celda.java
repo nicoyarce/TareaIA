@@ -31,9 +31,8 @@ public class Celda extends JComponent implements Constantes {
             System.out.println(e.toString());
         }
     }
-    //metodo para dibujar celda, hace uso de drawRect
     @Override
-    public void paintComponent(Graphics g) {
+    public void update(Graphics g){
         switch (tipo) {
             case 'J':
                 g.drawImage(jugador, X, Y, null);
@@ -51,6 +50,11 @@ public class Celda extends JComponent implements Constantes {
                 g.drawImage(portal, X, Y, this);
                 break;
         }
+    }
+    //metodo para dibujar celda, hace uso de drawRect   
+    @Override
+    public void paintComponent(Graphics g) {
+        update(g);
     }
     //si el click esta sobre la celda
     public boolean celdaSeleccionada(int xp, int yp) {

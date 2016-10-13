@@ -37,8 +37,12 @@ public class Lienzo extends Canvas implements Constantes {
 
 ///metodo llamada la primera vez que se pinta
     @Override
-    public void paint(Graphics g) {
+    public void update(Graphics g) {
         laberinto.paintComponent(g);
+    }
+    @Override
+    public void paint(Graphics g) {
+        update(g);
     }
 
     private void activarCelda(MouseEvent evt) {
