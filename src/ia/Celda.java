@@ -49,9 +49,9 @@ public class Celda extends JComponent implements Constantes {
             case 'O':
                 g.drawImage(obstaculo, coordenadaX, coordenadaY, this);
                 break;
-            case 'V':
+           /* case 'V':
                 g.drawImage(camino, coordenadaX, coordenadaY, this);
-                break;
+                break;*/
             case 'A':
                 g.drawImage(acera, coordenadaX, coordenadaY, this);
                 break;
@@ -60,8 +60,7 @@ public class Celda extends JComponent implements Constantes {
                 break;
             /*case 'P':
                 g.drawImage(portal, X, Y, this);
-                break;
-            */
+                break;*/
         }
     }
     

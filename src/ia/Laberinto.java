@@ -8,8 +8,10 @@ public class Laberinto extends JComponent implements Constantes {
 
     public Celda[][] celdas;
     public Celda celdaMovimiento;
+    public Lienzo lienzoPadre;
 
-    public Laberinto() {
+    public Laberinto(Lienzo lienzoPadre) {
+        this.lienzoPadre = lienzoPadre;
         celdas = new Celda[N_CELDAS_ANCHO][N_CELDAS_ALTO];
         //inicializar el array de celdas
         for (int i = 0; i < N_CELDAS_ANCHO; i++) {
