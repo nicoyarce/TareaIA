@@ -2,9 +2,8 @@ package ia;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JFrame;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements Constantes {
 //nuestra clase se compone de un lienzo de dibujo (herada de canvas)
 
     public Lienzo lienzo;
@@ -16,6 +15,6 @@ public class VentanaPrincipal extends JFrame {
         lienzo.setFocusable(true);
         sizeScreen = super.getToolkit().getScreenSize();
         this.getContentPane().add(lienzo);
-        this.setSize(sizeScreen.width, sizeScreen.height);
+        this.setSize(SIZE_WIDTH, SIZE_HEIGHT);    
     }
 }
