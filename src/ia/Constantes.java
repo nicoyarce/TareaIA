@@ -1,12 +1,13 @@
 package ia;
 
+import java.awt.Color;
 import java.util.Random;
 
 public interface Constantes {
 
-    public final int TAMANIO_CELDA = 32;
-    public final int N_CELDAS_ANCHO = 40;
-    public final int N_CELDAS_ALTO = 30;
+    public final int TAMANIO_CELDA = 31;
+    public final int N_CELDAS_ANCHO = 42;
+    public final int N_CELDAS_ALTO = 32;
     public final int SIZE_WIDTH = TAMANIO_CELDA * N_CELDAS_ANCHO;
     public final int SIZE_HEIGHT = TAMANIO_CELDA * N_CELDAS_ALTO;
 
@@ -14,12 +15,15 @@ public interface Constantes {
     public final char JUGADOR = 'J';
     public final char CAMINO = 'V';
     public final char OBSTACULO = 'O';
-    public final char ADVERSARIO = 'A';
+    public final char VEHICULO = 'H';
     //public final char PORTAL = 'P';
     //nuevas constantes
-    public final char E = 'E';
-    public final char A = 'A';
-    public final char C = 'C';
+    public final char EDIFICIO = 'E';
+    public final char ACERA = 'A';
+    public final char CALLE = 'C';
+
+    public final int ALFA = 150;
+    public final Color COLORFONDO = new Color(192, 192, 192, ALFA);
 
     default int numeroAleatorio(int minimo, int maximo) {
         Random random = new Random();

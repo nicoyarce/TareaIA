@@ -22,9 +22,9 @@ public class Jugador extends TimerTask implements Constantes {
 
     public void moverJugadorDerecha() {
         if (jugador.coordenadaX < N_CELDAS_ANCHO - 1) {
-            //si al mover a la derecha no es adversario
+            //si al mover a la derecha no es vehiculo
             //me muevo normal
-            if (laberinto.celdas[jugador.coordenadaX + 1][jugador.coordenadaY].tipoCelda != 'A') {
+            if (laberinto.celdas[jugador.coordenadaX + 1][jugador.coordenadaY].tipoCelda != 'H') {
                 laberinto.celdas[jugador.coordenadaX][jugador.coordenadaY].tipoCelda = 'V';
                 jugador.coordenadaX = jugador.coordenadaX + 1;
                 laberinto.celdas[jugador.coordenadaX][jugador.coordenadaY].tipoCelda = 'J';
@@ -45,8 +45,8 @@ public class Jugador extends TimerTask implements Constantes {
         //si no estocoordenadaY al inicio
         if (jugador.coordenadaX > 0) {
             //compruebo que al moverme a la izquierda no
-            //este el adversario
-            if (laberinto.celdas[jugador.coordenadaX - 1][jugador.coordenadaY].tipoCelda != 'A') {
+            //este el vehiculo
+            if (laberinto.celdas[jugador.coordenadaX - 1][jugador.coordenadaY].tipoCelda != 'H') {
                 laberinto.celdas[jugador.coordenadaX][jugador.coordenadaY].tipoCelda = 'V';
                 jugador.coordenadaX = jugador.coordenadaX - 1;
                 laberinto.celdas[jugador.coordenadaX][jugador.coordenadaY].tipoCelda = 'J';

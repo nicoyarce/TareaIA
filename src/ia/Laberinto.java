@@ -19,12 +19,9 @@ public class Laberinto extends JComponent implements Constantes {
                 celdas[i][j] = new Celda(i + (i * TAMANIO_CELDA), j + (j * TAMANIO_CELDA), i, j, 'V');
             }
         }
-        //pongo un edificio
-        for (int i = 5; i < 9; i++) {
-            for (int j = 5; j < 9; j++) {
-                celdas[i][j].tipoCelda = 'E';
-            }
-        }
+        //pongo unos edificios
+        crearEdificio(2, 8, 0, 3);
+        crearEdificio(11, 30, 0, 3);
 
         celdaMovimiento = new Celda(0, 0, 0, 0, 'J');
     }
@@ -98,7 +95,7 @@ public class Laberinto extends JComponent implements Constantes {
     }
 
     private boolean noHayPared(int x, int y) {
-        return celdas[x][y].tipoCelda != 'E';
+        return celdas[x][y].tipoCelda != 'O';
     }
 
     private void avanzar(int x, int y, char mov) {
@@ -122,4 +119,11 @@ public class Laberinto extends JComponent implements Constantes {
         }
     }
 
+    private void crearEdificio(int x1, int x2, int y1, int y2) {
+        for (int i = x1; i < x2; i++) {
+            for (int j = y1; j < y2; j++) {
+                celdas[i][j].tipoCelda = 'O';
+            }
+        }
+    }
 }
