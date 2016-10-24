@@ -6,8 +6,8 @@ import java.util.Random;
 public interface Constantes {
 
     public final int TAMANIO_CELDA = 31;
-    public final int N_CELDAS_ANCHO = 42;
-    public final int N_CELDAS_ALTO = 32;
+    public final int N_CELDAS_ANCHO = 43;
+    public final int N_CELDAS_ALTO = 26;
     public final int SIZE_WIDTH = TAMANIO_CELDA * N_CELDAS_ANCHO;
     public final int SIZE_HEIGHT = TAMANIO_CELDA * N_CELDAS_ALTO;
 

@@ -16,7 +16,7 @@ public class Celda extends JComponent implements Constantes {
     public int j;
     public char tipoCelda;
     public int indexSprite;
-    public BufferedImage sprites[], imagenSprites;
+    public BufferedImage sprites[], jugador2;
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal;
     public BufferedImage edificio, acera, carretera;
@@ -28,9 +28,9 @@ public class Celda extends JComponent implements Constantes {
         this.i = i;
         this.j = j;
         this.tipoCelda = tipo;
-        //indexSprite = 2;
+        indexSprite = 0;
         try {
-            jugador = ImageIO.read(new File("images/jugador.png"));
+            //jugador = ImageIO.read(new File("images/jugador.png"));
             //obstaculo = ImageIO.read(new File("images/obstaculo.png"));
             //camino = ImageIO.read(new File("images/camino.png"));
             vehiculo = ImageIO.read(new File("images/vehiculo.png"));
@@ -38,35 +38,34 @@ public class Celda extends JComponent implements Constantes {
             edificio = ImageIO.read(new File("images/edificio.png"));
             acera = ImageIO.read(new File("images/acera.png"));
             carretera = ImageIO.read(new File("images/carretera.png"));
-            /*//gestion de sprites
+            //gestion de sprites
             //cargo la imagen de grupo de imagenes
-            imagenSprites = ImageIO.read(new File("images/jugador2.png"));
+            jugador2 = ImageIO.read(new File("images/jugador2.png"));
             //creo una array de 2 x 2
-            sprites = new BufferedImage[2 * 2];
+            sprites = new BufferedImage[4];
             //lo recorro separando las imagenes
             for (int is = 0; is < 2; is++) {
                 for (int js = 0; js < 2; js++) {
-                    sprites[(i * 2) + j] = imagenSprites.getSubimage(i * TAMANIO_CELDA, j * TAMANIO_CELDA, TAMANIO_CELDA, TAMANIO_CELDA);
+                    sprites[(is * 2) + js] = jugador2.getSubimage(is * TAMANIO_CELDA, js * TAMANIO_CELDA, TAMANIO_CELDA, TAMANIO_CELDA);
                 }
-            }*/
+            }
         } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
 
     @Override
-    public void update(Graphics g
-    ) {
+    public void update(Graphics g) {
         switch (tipoCelda) {
             case 'J':
-                g.drawImage(jugador, coordenadaX, coordenadaY, null);
+                g.drawImage(sprites[indexSprite], coordenadaX, coordenadaY, this);
                 break;
             case 'O':
                 g.drawImage(obstaculo, coordenadaX, coordenadaY, this);
                 break;
             case 'V':
-                g.setColor(COLORFONDO);
-                g.fillRect(coordenadaX, coordenadaY, TAMANIO_CELDA, TAMANIO_CELDA);
+                //g.setColor(COLORFONDO);
+                // g.fillRect(coordenadaX, coordenadaY, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case 'H':
                 g.drawImage(vehiculo, coordenadaX, coordenadaY, this);
