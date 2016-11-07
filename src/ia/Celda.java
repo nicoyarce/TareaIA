@@ -68,7 +68,7 @@ public class Celda extends JComponent implements Constantes {
             case PEATON:
                 g.drawImage(peaton, x, y, this);
                 break;
-            case PASO:
+            case CALLE:
                 g.setColor(PASOP);
                 g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;

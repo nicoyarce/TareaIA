@@ -6,7 +6,7 @@ import java.util.TimerTask;
 public class Vehiculo extends TimerTask implements Constantes {
 
     public Laberinto laberinto;
-    public Celda auto;
+    public Celda auto, celdaMovimiento;
     public Point p1, p2, p3, p4;
 
     public Vehiculo(Laberinto laberinto, Point xp, Point yp) {
@@ -15,53 +15,76 @@ public class Vehiculo extends TimerTask implements Constantes {
         p3 = new Point(yp.x, yp.y);
         p4 = new Point(xp.x, yp.y);
         this.laberinto = laberinto;
+        celdaMovimiento = new Celda(p1.x, p1.y, laberinto.celdas[p1.x][p1.y].tipoCelda);
         auto = new Celda(p1.x, p1.y, VEHICULO);
-        laberinto.celdas[auto.x][auto.y].tipoCelda = VEHICULO;
     }
 
     private void moverVehiculo() {
-        if (auto.x == p2.x && auto.y < p3.y && auto.y >= p2.y) {
-            moverAbajo();
-        } else if (auto.x >= p1.x && auto.y == p1.y && auto.x < p2.x) {
-            moverDerecha();
-        } else if (auto.x <= p3.x && auto.y == p3.y && auto.x > p4.x) {
-            moverIzquierda();
-        } else if (auto.x == p4.x && auto.y <= p4.y && auto.y >= p1.y) {
-            moverArriba();
+        if (celdaMovimiento.x == p2.x && celdaMovimiento.y < p3.y && celdaMovimiento.y >= p2.y) {
+            if (noHayJugador(celdaMovimiento.x, celdaMovimiento.y+1)) {
+                moverAbajo();
+            }
+        } else if (celdaMovimiento.x >= p1.x && celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
+            if (noHayJugador(celdaMovimiento.x+1, celdaMovimiento.y)) {
+                moverDerecha();
+            }
+        } else if (celdaMovimiento.x <= p3.x && celdaMovimiento.y == p3.y && celdaMovimiento.x > p4.x) {
+            if (noHayJugador(celdaMovimiento.x-1, celdaMovimiento.y)) {
+                moverIzquierda();
+            }
+        } else if (celdaMovimiento.x == p4.x && celdaMovimiento.y <= p4.y && celdaMovimiento.y >= p1.y) {
+            if (noHayJugador(celdaMovimiento.x, celdaMovimiento.y-1)) {
+                moverArriba();
+            }
         }
     }
 
     private void moverAbajo() {
-        laberinto.celdas[auto.x][auto.y].tipoCelda = CAMINO;
-        auto.y = auto.y + 1;
-        laberinto.celdas[auto.x][auto.y].tipoCelda = VEHICULO;
-        laberinto.celdas[auto.x][auto.y].indexSprite = 0;
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y + 1].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        celdaMovimiento.y = celdaMovimiento.y + 1;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
     }
 
     private void moverArriba() {
-        laberinto.celdas[auto.x][auto.y].tipoCelda = CAMINO;
-        auto.y = auto.y - 1;
-        laberinto.celdas[auto.x][auto.y].tipoCelda = VEHICULO;
-        laberinto.celdas[auto.x][auto.y].indexSprite = 2;
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y - 1].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        celdaMovimiento.y = celdaMovimiento.y - 1;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 2;
     }
 
     private void moverDerecha() {
-        laberinto.celdas[auto.x][auto.y].tipoCelda = CAMINO;
-        auto.x = auto.x + 1;
-        laberinto.celdas[auto.x][auto.y].tipoCelda = VEHICULO;
-        laberinto.celdas[auto.x][auto.y].indexSprite = 3;
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x + 1][celdaMovimiento.y].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        celdaMovimiento.x = celdaMovimiento.x + 1;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 3;
     }
 
     private void moverIzquierda() {
-        laberinto.celdas[auto.x][auto.y].tipoCelda = CAMINO;
-        auto.x = auto.x - 1;
-        laberinto.celdas[auto.x][auto.y].tipoCelda = VEHICULO;
-        laberinto.celdas[auto.x][auto.y].indexSprite = 1;
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x - 1][celdaMovimiento.y].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        celdaMovimiento.x = celdaMovimiento.x - 1;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
     }
 
     @Override
     public void run() {
         moverVehiculo();
         laberinto.lienzoPadre.repaint();
+    }
+
+    private boolean noHayJugador(int x, int y) {
+        return laberinto.celdas[x][y].tipoCelda != JUGADOR;
     }
 }

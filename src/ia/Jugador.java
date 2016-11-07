@@ -9,11 +9,12 @@ import java.util.TimerTask;
 public class Jugador implements Constantes {
 
     public Laberinto laberinto;
-    public Celda jugador;
+    public Celda jugador, celdaMovimiento;
 
     public Jugador(Laberinto laberinto) {
         this.laberinto = laberinto;
-        jugador = new Celda(0, 0, JUGADOR);
+        celdaMovimiento = new Celda(0,0,laberinto.celdas[0][0].tipoCelda);
+        jugador = new Celda(0, 0, JUGADOR);        
         laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
     }
 
@@ -79,7 +80,7 @@ public class Jugador implements Constantes {
         switch (mov) {
             case 'D':
                 if (x - 1 > 0 && x + 3 < N_CELDAS_ANCHO && y - 2 > 0 && y + 2 < N_CELDAS_ALTO) {
-                    if (laberinto.celdas[x][y + 1].tipoCelda == PASO) {
+                    if (laberinto.celdas[x][y + 1].tipoCelda == CALLE) {
                         System.out.println("Paso de cebra al frente");
                         return laberinto.celdas[x + 1][y + 1].tipoCelda != VEHICULO
                                 && laberinto.celdas[x - 1][y + 2].tipoCelda != VEHICULO
@@ -89,7 +90,7 @@ public class Jugador implements Constantes {
                 }
             case 'U':
                 if (x - 3 > 0 && x + 2 < N_CELDAS_ANCHO && y - 2 > 0 && y + 2 < N_CELDAS_ALTO) {
-                    if (laberinto.celdas[x][y - 1].tipoCelda == PASO) {
+                    if (laberinto.celdas[x][y - 1].tipoCelda == CALLE) {
                         System.out.println("Paso de cebra al frente");
                         return laberinto.celdas[x - 1][y - 1].tipoCelda != VEHICULO
                                 && laberinto.celdas[x + 1][y - 2].tipoCelda != VEHICULO
@@ -99,7 +100,7 @@ public class Jugador implements Constantes {
                 }
             case 'R':
                 if (x - 2 > 0 && x + 2 < N_CELDAS_ANCHO && y - 3 > 0 && y + 2 < N_CELDAS_ALTO) {
-                    if (laberinto.celdas[x + 1][y].tipoCelda == PASO) {
+                    if (laberinto.celdas[x + 1][y].tipoCelda == CALLE) {
                         System.out.println("Paso de cebra al frente");
                         return laberinto.celdas[x + 1][y - 1].tipoCelda != VEHICULO
                                 && laberinto.celdas[x + 2][y + 1].tipoCelda != VEHICULO
@@ -109,7 +110,7 @@ public class Jugador implements Constantes {
                 }
             case 'L':
                 if (x - 2 > 0 && x + 2 < N_CELDAS_ANCHO && y - 2 > 0 && y + 3 < N_CELDAS_ALTO) {
-                    if (laberinto.celdas[x - 1][y].tipoCelda == PASO) {
+                    if (laberinto.celdas[x - 1][y].tipoCelda == CALLE) {
                         System.out.println("Paso de cebra al frente");
                         return laberinto.celdas[x - 1][y + 1].tipoCelda != VEHICULO
                                 && laberinto.celdas[x - 2][y - 1].tipoCelda != VEHICULO
@@ -123,35 +124,39 @@ public class Jugador implements Constantes {
 
     private void avanzar(int x, int y, char mov) {
         char temp;
-        temp = laberinto.celdas[x][y].tipoCelda;
         System.out.println(x + " " + y);
         switch (mov) {
             case 'D':
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = temp;
-                //laberinto.celdas[jugador.x][jugador.y].tipoCelda = CAMINO;
+                temp = celdaMovimiento.tipoCelda;
+                celdaMovimiento.tipoCelda=laberinto.celdas[x][y].tipoCelda;
+                laberinto.celdas[x][y-1].tipoCelda=temp;                
+                laberinto.celdas[x][y].tipoCelda=JUGADOR;                
                 jugador.y = jugador.y + 1;
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 0;
                 break;
             case 'U':
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = temp;
-                //laberinto.celdas[jugador.x][jugador.y].tipoCelda = CAMINO;
+                temp = celdaMovimiento.tipoCelda;
+                celdaMovimiento.tipoCelda=laberinto.celdas[x][y].tipoCelda;
+                laberinto.celdas[x][y+1].tipoCelda=temp;                
+                laberinto.celdas[x][y].tipoCelda=JUGADOR;                
                 jugador.y = jugador.y - 1;
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 2;
                 break;
             case 'R':
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = temp;
-                //laberinto.celdas[jugador.x][jugador.y].tipoCelda = CAMINO;
+                temp = celdaMovimiento.tipoCelda;
+                
+                celdaMovimiento.tipoCelda=laberinto.celdas[x][y].tipoCelda;
+                laberinto.celdas[x-1][y].tipoCelda=temp;                
+                laberinto.celdas[x][y].tipoCelda=JUGADOR;                
                 jugador.x = jugador.x + 1;
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 3;
                 break;
             case 'L':
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = temp;
-                //laberinto.celdas[jugador.x][jugador.y].tipoCelda = CAMINO;
+                temp = celdaMovimiento.tipoCelda;
+                celdaMovimiento.tipoCelda=laberinto.celdas[x][y].tipoCelda;
+                laberinto.celdas[x+1][y].tipoCelda=temp;                
+                laberinto.celdas[x][y].tipoCelda=JUGADOR;                
                 jugador.x = jugador.x - 1;
-                laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 1;
                 break;
         }

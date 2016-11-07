@@ -43,24 +43,14 @@ public class Laberinto extends JComponent implements Constantes {
         crearEdificio(36, 37, 0, 2); //banca
         crearEdificio(39, 41, 0, 2); //fuente
 
-        crearPasoPeatonal(9, 11, 3, 4);
-        crearPasoPeatonal(33, 35, 3, 4);
-        crearPasoPeatonal(11, 12, 4, 6);
-        crearPasoPeatonal(30, 31, 4, 6);
-        crearPasoPeatonal(35, 36, 4, 6);
-        crearPasoPeatonal(9, 11, 6, 7);
-        crearPasoPeatonal(11, 12, 11, 13);
-        crearPasoPeatonal(9, 11, 6, 7);
-        crearPasoPeatonal(30, 31, 11, 13);
-        crearPasoPeatonal(35, 36, 11, 13);
-        crearPasoPeatonal(9, 11, 13, 14);
-        crearPasoPeatonal(33, 35, 13, 14);
-        crearPasoPeatonal(11, 12, 17, 19);
-        crearPasoPeatonal(32, 33, 17, 19);
-        crearPasoPeatonal(33, 35, 19, 20);
-        crearPasoPeatonal(1, 3, 20, 21);
-        crearPasoPeatonal(9, 11, 20, 21);
-        crearPasoPeatonal(33, 35, 19, 20);
+        crearCalle(9, 11, 3, 4);
+        crearCalle(33, 35, 3, 4);
+        crearCalle(11, 12, 4, 6);
+        crearCalle(30, 31, 4, 6);
+        crearCalle(35, 36, 4, 6);
+        crearCalle(35, 36, 4, 6);
+        crearCalle(35, 36, 4, 6);
+        
     }
 
     @Override
@@ -85,10 +75,10 @@ public class Laberinto extends JComponent implements Constantes {
         }
     }
 
-    private void crearPasoPeatonal(int x1, int x2, int y1, int y2) {
+    private void crearCalle(int x1, int x2, int y1, int y2) {
         for (int i = x1; i < x2; i++) {
             for (int j = y1; j < y2; j++) {
-                celdas[i][j].tipoCelda = PASO;
+                celdas[i][j].tipoCelda = CALLE;
             }
         }
     }

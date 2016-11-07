@@ -19,10 +19,9 @@ public interface Constantes {
     //public final char PORTAL = 'P';
     //nuevas constantes
     public final char EDIFICIO = 'E';
-    public final char ACERA = 'A';
-    public final char CALLE = 'C';
+    public final char ACERA = 'A';    
     public final char PEATON = 'P';
-    public final char PASO = 'S';
+    public final char CALLE = 'C';
 
     public final int ALFA = 150;
     public final Color COLORFONDO = new Color(192, 192, 192, ALFA);
