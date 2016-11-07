@@ -10,27 +10,22 @@ import javax.swing.JComponent;
 public class Celda extends JComponent implements Constantes {
 
     //atributos
-    public int coordenadaX;
-    public int coordenadaY;
-    public int i;
-    public int j;
+    public int x;
+    public int y;
     public char tipoCelda;
     public int indexSprite;
-    public BufferedImage sprites[], jugador2;
+    public BufferedImage[] spriteJugador, spriteVehiculo;
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal;
-    public BufferedImage edificio, acera, carretera;
+    public BufferedImage edificio, acera, carretera, peaton;
 
     //constructor, inicializa los atributos
-    public Celda(int x, int y, int i, int j, char tipo) {
-        this.coordenadaX = x;
-        this.coordenadaY = y;
-        this.i = i;
-        this.j = j;
+    public Celda(int x, int y, char tipo) {
+        this.x = x;
+        this.y = y;
         this.tipoCelda = tipo;
         indexSprite = 0;
         try {
-            //jugador = ImageIO.read(new File("images/jugador.png"));
             //obstaculo = ImageIO.read(new File("images/obstaculo.png"));
             //camino = ImageIO.read(new File("images/camino.png"));
             vehiculo = ImageIO.read(new File("images/vehiculo.png"));
@@ -38,17 +33,11 @@ public class Celda extends JComponent implements Constantes {
             edificio = ImageIO.read(new File("images/edificio.png"));
             acera = ImageIO.read(new File("images/acera.png"));
             carretera = ImageIO.read(new File("images/carretera.png"));
-            //gestion de sprites
-            //cargo la imagen de grupo de imagenes
-            jugador2 = ImageIO.read(new File("images/jugador2.png"));
-            //creo una array de 2 x 2
-            sprites = new BufferedImage[4];
-            //lo recorro separando las imagenes
-            for (int is = 0; is < 2; is++) {
-                for (int js = 0; js < 2; js++) {
-                    sprites[(is * 2) + js] = jugador2.getSubimage(is * TAMANIO_CELDA, js * TAMANIO_CELDA, TAMANIO_CELDA, TAMANIO_CELDA);
-                }
-            }
+            peaton = ImageIO.read(new File("images/peaton.png"));
+            jugador = ImageIO.read(new File("images/jugador.png"));
+
+            spriteJugador = cargarSprite(jugador, 2, 2);
+            spriteVehiculo = cargarSprite(vehiculo, 2, 2);
         } catch (IOException e) {
             System.out.println(e.toString());
         }
@@ -57,28 +46,32 @@ public class Celda extends JComponent implements Constantes {
     @Override
     public void update(Graphics g) {
         switch (tipoCelda) {
-            case 'J':
-                g.drawImage(sprites[indexSprite], coordenadaX, coordenadaY, this);
+            case JUGADOR:
+                g.drawImage(spriteJugador[indexSprite], x, y, null);
                 break;
-            case 'O':
-                g.drawImage(obstaculo, coordenadaX, coordenadaY, this);
+            case OBSTACULO:
+                g.drawImage(obstaculo, x, y, this);
                 break;
-            case 'V':
+            case CAMINO:
                 //g.setColor(COLORFONDO);
-                // g.fillRect(coordenadaX, coordenadaY, TAMANIO_CELDA, TAMANIO_CELDA);
+                // g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
-            case 'H':
-                g.drawImage(vehiculo, coordenadaX, coordenadaY, this);
+            case VEHICULO:
+                g.drawImage(spriteVehiculo[indexSprite], x, y, this);
                 break;
-            case 'A':
-                g.drawImage(acera, coordenadaX, coordenadaY, this);
+            case ACERA:
+                g.drawImage(acera, x, y, this);
                 break;
-            case 'E':
-                g.drawImage(edificio, coordenadaX, coordenadaY, this);
+            case EDIFICIO:
+                g.drawImage(edificio, x, y, this);
                 break;
-            /*case 'P':
-                g.drawImage(portal, X, Y, this);
-                break;*/
+            case PEATON:
+                g.drawImage(peaton, x, y, this);
+                break;
+            case PASO:
+                g.setColor(PASOP);
+                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                break;
         }
     }
 
@@ -87,4 +80,13 @@ public class Celda extends JComponent implements Constantes {
         update(g);
     }
 
+    private BufferedImage[] cargarSprite(BufferedImage imagen, int x, int y) {
+        BufferedImage sprite[] = new BufferedImage[x * y];
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                sprite[(i * 2) + j] = imagen.getSubimage(i * TAMANIO_CELDA, j * TAMANIO_CELDA + 1, TAMANIO_CELDA, TAMANIO_CELDA);
+            }
+        }
+        return sprite;
+    }
 }
