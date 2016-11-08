@@ -21,19 +21,19 @@ public class Vehiculo extends TimerTask implements Constantes {
 
     private void moverVehiculo() {
         if (celdaMovimiento.x == p2.x && celdaMovimiento.y < p3.y && celdaMovimiento.y >= p2.y) {
-            if (noHayJugador(celdaMovimiento.x, celdaMovimiento.y+1)) {
+            if (noHayPersona(celdaMovimiento.x, celdaMovimiento.y + 1)) {
                 moverAbajo();
             }
         } else if (celdaMovimiento.x >= p1.x && celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
-            if (noHayJugador(celdaMovimiento.x+1, celdaMovimiento.y)) {
+            if (noHayPersona(celdaMovimiento.x + 1, celdaMovimiento.y)) {
                 moverDerecha();
             }
         } else if (celdaMovimiento.x <= p3.x && celdaMovimiento.y == p3.y && celdaMovimiento.x > p4.x) {
-            if (noHayJugador(celdaMovimiento.x-1, celdaMovimiento.y)) {
+            if (noHayPersona(celdaMovimiento.x - 1, celdaMovimiento.y)) {
                 moverIzquierda();
             }
         } else if (celdaMovimiento.x == p4.x && celdaMovimiento.y <= p4.y && celdaMovimiento.y >= p1.y) {
-            if (noHayJugador(celdaMovimiento.x, celdaMovimiento.y-1)) {
+            if (noHayPersona(celdaMovimiento.x, celdaMovimiento.y - 1)) {
                 moverArriba();
             }
         }
@@ -84,7 +84,9 @@ public class Vehiculo extends TimerTask implements Constantes {
         laberinto.lienzoPadre.repaint();
     }
 
-    private boolean noHayJugador(int x, int y) {
-        return laberinto.celdas[x][y].tipoCelda != JUGADOR;
+    private boolean noHayPersona(int x, int y) {
+        return laberinto.celdas[x][y].tipoCelda != JUGADOR
+                && laberinto.celdas[x][y].tipoCelda != PEATON;
+
     }
 }

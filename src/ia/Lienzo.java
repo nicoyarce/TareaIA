@@ -16,7 +16,8 @@ public class Lienzo extends Canvas implements Constantes {
     public Laberinto laberinto;
     public Image fondo;
 
-    public Vehiculo auto, auto2, auto3;
+    public Vehiculo auto, auto2;
+    public Peaton peaton, peaton2;
     public Jugador jugador;
     public Timer lanzadorTareas;
 
@@ -28,12 +29,12 @@ public class Lienzo extends Canvas implements Constantes {
         Point p2 = new Point(33, 11);
         Point p3 = new Point(10, 12);
         Point p4 = new Point(33, 17);
-        //Point p5 = new Point(34, 0);
-        //Point p6 = new Point(34, 22);
+        Point p5 = new Point(11, 13);
+        Point p6 = new Point(32, 19);
         laberinto = new Laberinto(this);
         auto = new Vehiculo(laberinto, p1, p2);
         auto2 = new Vehiculo(laberinto, p3, p4);
-        //auto3 = new Vehiculo(laberinto, p5, p6);
+        peaton = new Peaton(laberinto, p5, p6);
         jugador = new Jugador(laberinto);
         try {
             fondo = ImageIO.read(new File("images/fondo.png"));
@@ -52,7 +53,7 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas = new Timer();
         lanzadorTareas.scheduleAtFixedRate(auto, 0, 500);
         lanzadorTareas.scheduleAtFixedRate(auto2, 0, 400);
-        //lanzadorTareas.scheduleAtFixedRate(auto3, 0, 300);
+        lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
     }
 
     @Override

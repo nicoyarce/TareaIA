@@ -73,7 +73,8 @@ public class Jugador implements Constantes {
 
     private boolean noHayPared(int x, int y) {
         return laberinto.celdas[x][y].tipoCelda != OBSTACULO
-                && laberinto.celdas[x][y].tipoCelda != VEHICULO;
+                && laberinto.celdas[x][y].tipoCelda != VEHICULO
+                && laberinto.celdas[x][y].tipoCelda != PEATON;
     }
 
     private boolean noVieneVehiculo(int x, int y, char mov) {

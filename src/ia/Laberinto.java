@@ -1,7 +1,6 @@
 package ia;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 
 public class Laberinto extends JComponent implements Constantes {
@@ -17,7 +16,6 @@ public class Laberinto extends JComponent implements Constantes {
         for (int i = 0; i < N_CELDAS_ANCHO; i++) {
             for (int j = 0; j < N_CELDAS_ALTO; j++) {
                 celdas[i][j] = new Celda(i + (i * TAMANIO_CELDA), j + (j * TAMANIO_CELDA), CAMINO);
-                celdas[i][j].tipoCelda = CAMINO;
             }
         }
         //pongo unos edificios
@@ -52,7 +50,7 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(1, 3, 12, 21);
         crearCalle(9, 11, 0, 21);
         crearCalle(33, 35, 0, 23);
-        
+
     }
 
     @Override
