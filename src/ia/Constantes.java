@@ -18,14 +18,13 @@ public interface Constantes {
     public final char VEHICULO = 'H';
     //public final char PORTAL = 'P';
     //nuevas constantes
-    public final char EDIFICIO = 'E';
-    public final char ACERA = 'A';    
+    public final char EDIFICIO = 'E';    
     public final char PEATON = 'P';
     public final char CALLE = 'C';
 
     public final int ALFA = 150;
-    public final Color COLORFONDO = new Color(192, 192, 192, ALFA);
-    public final Color PASOP = new Color(255, 255, 128, ALFA);
+    public final Color COLORGRIS = new Color(192, 192, 192, ALFA);
+    public final Color COLORAMARILLO = new Color(255, 255, 128, ALFA);
 
     default int numeroAleatorio(int minimo, int maximo) {
         Random random = new Random();

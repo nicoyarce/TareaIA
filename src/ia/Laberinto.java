@@ -17,6 +17,7 @@ public class Laberinto extends JComponent implements Constantes {
         for (int i = 0; i < N_CELDAS_ANCHO; i++) {
             for (int j = 0; j < N_CELDAS_ALTO; j++) {
                 celdas[i][j] = new Celda(i + (i * TAMANIO_CELDA), j + (j * TAMANIO_CELDA), CAMINO);
+                celdas[i][j].tipoCelda = CAMINO;
             }
         }
         //pongo unos edificios
@@ -43,13 +44,14 @@ public class Laberinto extends JComponent implements Constantes {
         crearEdificio(36, 37, 0, 2); //banca
         crearEdificio(39, 41, 0, 2); //fuente
 
-        crearCalle(9, 11, 3, 4);
-        crearCalle(33, 35, 3, 4);
-        crearCalle(11, 12, 4, 6);
-        crearCalle(30, 31, 4, 6);
+        crearCalle(0, 41, 4, 6);
+        crearCalle(9, 41, 11, 13);
+        crearCalle(9, 35, 17, 19);
+        crearCalle(1, 11, 21, 23);
         crearCalle(35, 36, 4, 6);
-        crearCalle(35, 36, 4, 6);
-        crearCalle(35, 36, 4, 6);
+        crearCalle(1, 3, 12, 21);
+        crearCalle(9, 11, 0, 21);
+        crearCalle(33, 35, 0, 23);
         
     }
 
