@@ -16,8 +16,8 @@ public class Celda extends JComponent implements Constantes {
     public int indexSprite;
     public BufferedImage[] spriteJugador, spriteVehiculo;
     //nuevos atributos para manejar imagenes
-    public BufferedImage jugador, obstaculo, camino, vehiculo, portal;
-    public BufferedImage edificio, acera, carretera, peaton;
+    public BufferedImage jugador, obstaculo, camino, vehiculo, portal, 
+            edificio, acera, carretera, peaton, micro;
 
     //constructor, inicializa los atributos
     public Celda(int x, int y, char tipo) {
@@ -29,7 +29,8 @@ public class Celda extends JComponent implements Constantes {
             //obstaculo = ImageIO.read(new File("images/obstaculo.png"));
             //camino = ImageIO.read(new File("images/camino.png"));
             vehiculo = ImageIO.read(new File("images/vehiculo.png"));
-            //portal = ImageIO.read(new File("images/portal.png"));
+            micro = ImageIO.read(new File("images/micro.png"));
+            portal = ImageIO.read(new File("images/portal.png"));
             edificio = ImageIO.read(new File("images/edificio.png"));
             acera = ImageIO.read(new File("images/acera.png"));
             carretera = ImageIO.read(new File("images/carretera.png"));
@@ -68,6 +69,12 @@ public class Celda extends JComponent implements Constantes {
             case CALLE:
                 //g.setColor(COLORAMARILLO);
                 //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+            break;
+            case PORTAL:
+                g.drawImage(portal, x, y, this);
+                break;
+            case MICRO:
+                g.drawImage(micro, x, y, this);
                 break;
         }
     }

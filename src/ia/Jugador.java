@@ -2,9 +2,8 @@ package ia;
 
 import static ia.Constantes.N_CELDAS_ALTO;
 import static ia.Constantes.N_CELDAS_ANCHO;
-import static ia.Constantes.TAMANIO_CELDA;
 import java.awt.event.KeyEvent;
-import java.util.TimerTask;
+import javax.swing.JOptionPane;
 
 public class Jugador implements Constantes {
 
@@ -140,7 +139,8 @@ public class Jugador implements Constantes {
 
     private void avanzar(int x, int y, char mov) {
         char temp;
-        System.out.println(x + " " + y + "Tipo celda: " + jugador.tipoCelda);
+        hayPortal(x, y);
+        System.out.println(x + " " + y);
         switch (mov) {
             case 'D':
                 temp = celdaMovimiento.tipoCelda;
@@ -177,7 +177,12 @@ public class Jugador implements Constantes {
                 break;
         }
     }
-
+    
+    private void hayPortal(int x, int y){
+        if(laberinto.celdas[x][y].tipoCelda == PORTAL){
+            JOptionPane.showMessageDialog(null,"Cartero en portal");
+        }
+    }
     /*@Override
     public void run() {
         laberinto.lienzoPadre.repaint();

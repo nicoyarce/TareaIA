@@ -16,11 +16,13 @@ public interface Constantes {
     public final char CAMINO = 'V';
     public final char OBSTACULO = 'O';
     public final char VEHICULO = 'H';
-    //public final char PORTAL = 'P';
+    public final char MICRO = 'M';
+    public final char PORTAL = 'R';
     //nuevas constantes
     public final char EDIFICIO = 'E';    
     public final char PEATON = 'P';
     public final char CALLE = 'C';
+    public final int PEATONESMICRO = 4;
 
     public final int ALFA = 150;
     public final Color COLORGRIS = new Color(192, 192, 192, ALFA);

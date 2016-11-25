@@ -86,7 +86,8 @@ public class Vehiculo extends TimerTask implements Constantes {
 
     private boolean noHayPersona(int x, int y) {
         return laberinto.celdas[x][y].tipoCelda != JUGADOR
-                && laberinto.celdas[x][y].tipoCelda != PEATON;
-
+                && laberinto.celdas[x][y].tipoCelda != PEATON
+                && laberinto.celdas[x][y].tipoCelda != VEHICULO
+                && laberinto.celdas[x][y].tipoCelda != MICRO;
     }
 }
