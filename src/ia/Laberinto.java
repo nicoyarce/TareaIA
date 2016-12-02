@@ -50,8 +50,10 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(1, 3, 12, 21);
         crearCalle(9, 11, 0, 21);
         crearCalle(33, 35, 0, 23);
-        
-        celdas[38][9].tipoCelda=PEATON;
+
+        celdas[38][9].tipoCelda = PEATON;
+        celdas[13][2].tipoCelda = PORTAL;
+        celdas[28][2].tipoCelda = PORTAL;
 
     }
 

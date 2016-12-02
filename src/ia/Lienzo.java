@@ -19,7 +19,6 @@ public class Lienzo extends Canvas implements Constantes {
     public Vehiculo auto, auto2;
     public Peaton peaton, peaton2;
     public Jugador jugador;
-    public Portal portal1, portal2;  
     public Micro micro1;
     public Timer lanzadorTareas;
 
@@ -33,14 +32,12 @@ public class Lienzo extends Canvas implements Constantes {
         Point p4 = new Point(33, 17);
         Point p5 = new Point(11, 13);
         Point p6 = new Point(32, 19);
-        Point p7 = new Point(10,5);
-        Point p8 = new Point(33,18);
+        Point p7 = new Point(10, 5);
+        Point p8 = new Point(33, 18);
         laberinto = new Laberinto(this);
         auto = new Vehiculo(laberinto, p1, p2);
         auto2 = new Vehiculo(laberinto, p3, p4);
         peaton = new Peaton(laberinto, p5, p6);
-        portal1 = new Portal(laberinto, 13, 2, 1);
-        portal2 = new Portal(laberinto, 28, 2, 1);
         micro1 = new Micro(laberinto, p7, p8);
         jugador = new Jugador(laberinto);
         try {

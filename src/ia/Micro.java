@@ -18,12 +18,12 @@ public class Micro extends TimerTask implements Constantes {
         p4 = new Point(xp.x, yp.y);
         this.laberinto = laberinto;
         celdaMovimiento = new Celda(p1.x, p1.y, laberinto.celdas[p1.x][p1.y].tipoCelda);
-        micro = new Celda(p1.x, p1.y, MICRO);        
-        npeatones=PEATONESMICRO;
-        p = new Peaton [PEATONESMICRO];
+        micro = new Celda(p1.x, p1.y, MICRO);
+        npeatones = PEATONESMICRO;
+        p = new Peaton[PEATONESMICRO];
         for (int i = 1; i <= npeatones; i++) {
-            xp.x=xp.x-i;
-            p[i-1] = new Peaton(laberinto, xp, yp);
+            p1.x = p1.x - i;
+            p[i - 1] = new Peaton(laberinto, p1, yp);
         }
     }
 
@@ -56,7 +56,7 @@ public class Micro extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
         for (int i = 0; i < npeatones; i++) {
             p[i].moverAbajo();
-        }        
+        }
     }
 
     private void moverArriba() {
