@@ -1,4 +1,4 @@
-package ia;
+package proyecto;
 
 import java.awt.Color;
 import java.util.Random;
@@ -22,7 +22,8 @@ public interface Constantes {
     public final char EDIFICIO = 'E';    
     public final char PEATON = 'P';
     public final char CALLE = 'C';
-    public final int PEATONESMICRO = 4;
+    public final int PEATONESMICRO = 3;
+    public final int NCARTAS = 5;
 
     public final int ALFA = 150;
     public final Color COLORGRIS = new Color(192, 192, 192, ALFA);

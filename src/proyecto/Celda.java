@@ -1,4 +1,4 @@
-package ia;
+package proyecto;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 public class Celda extends JComponent implements Constantes {
-
     //atributos
     public int x;
     public int y;
@@ -36,6 +35,7 @@ public class Celda extends JComponent implements Constantes {
             carretera = ImageIO.read(new File("images/carretera.png"));
             peaton = ImageIO.read(new File("images/peaton.png"));
             jugador = ImageIO.read(new File("images/jugador.png"));
+            
 
             spriteJugador = cargarSprite(jugador, 2, 2);
             spriteVehiculo = cargarSprite(vehiculo, 2, 2);

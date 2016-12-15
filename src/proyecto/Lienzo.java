@@ -1,5 +1,5 @@
-package ia;
-
+package proyecto;
+import inteligencia.Estado;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,11 +18,10 @@ public class Lienzo extends Canvas implements Constantes {
 
     public Vehiculo auto, auto2;
     public Peaton peaton, peaton2;
-    public Jugador jugador;
-    public Portal portal1, portal2;  
+    public Jugador jugador; 
     public Micro micro1;
     public Timer lanzadorTareas;
-
+    public Carta carta;
     public Graphics graficoBuffer;
     public Image imagenBuffer;
 
@@ -39,10 +38,9 @@ public class Lienzo extends Canvas implements Constantes {
         auto = new Vehiculo(laberinto, p1, p2);
         auto2 = new Vehiculo(laberinto, p3, p4);
         peaton = new Peaton(laberinto, p5, p6);
-        portal1 = new Portal(laberinto, 13, 2, 1);
-        portal2 = new Portal(laberinto, 28, 2, 1);
         micro1 = new Micro(laberinto, p7, p8);
         jugador = new Jugador(laberinto);
+        carta = new Carta(laberinto);
         try {
             fondo = ImageIO.read(new File("images/fondo.png"));
         } catch (IOException e) {
@@ -57,11 +55,17 @@ public class Lienzo extends Canvas implements Constantes {
                 laberinto.lienzoPadre.repaint();
             }
         });
+        
+        jugador.inteligencia.destinos.add(new Estado(13,2,'N',null));
+        
+        
         lanzadorTareas = new Timer();
         //lanzadorTareas.scheduleAtFixedRate(auto, 0, 500);
         lanzadorTareas.scheduleAtFixedRate(auto2, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(micro1, 0, 600);
+        lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 200);
+        
     }
 
     @Override

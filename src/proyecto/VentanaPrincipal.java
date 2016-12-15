@@ -1,4 +1,4 @@
-package ia;
+package proyecto;
 
 import javax.swing.JFrame;
 

@@ -1,30 +1,22 @@
-package ia;
+package proyecto;
 
 import java.awt.Point;
 import java.util.TimerTask;
 
-public class Micro extends TimerTask implements Constantes {
+public class Vehiculo extends TimerTask implements Constantes {
 
     public Laberinto laberinto;
-    public Celda micro, celdaMovimiento;
+    public Celda auto, celdaMovimiento;
     public Point p1, p2, p3, p4;
-    public Peaton[] p;
-    public int npeatones;
 
-    public Micro(Laberinto laberinto, Point xp, Point yp) {
+    public Vehiculo(Laberinto laberinto, Point xp, Point yp) {
         p1 = new Point(xp.x, xp.y);
         p2 = new Point(yp.x, xp.y);
         p3 = new Point(yp.x, yp.y);
         p4 = new Point(xp.x, yp.y);
         this.laberinto = laberinto;
         celdaMovimiento = new Celda(p1.x, p1.y, laberinto.celdas[p1.x][p1.y].tipoCelda);
-        micro = new Celda(p1.x, p1.y, MICRO);        
-        npeatones=PEATONESMICRO;
-        p = new Peaton [PEATONESMICRO];
-        for (int i = 1; i <= npeatones; i++) {
-            xp.x=xp.x-i;
-            p[i-1] = new Peaton(laberinto, xp, yp);
-        }
+        auto = new Celda(p1.x, p1.y, VEHICULO);
     }
 
     private void moverVehiculo() {
@@ -52,11 +44,8 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y + 1].tipoCelda;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y + 1;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverAbajo();
-        }        
     }
 
     private void moverArriba() {
@@ -64,11 +53,9 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y - 1].tipoCelda;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y - 1;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 2;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverArriba();
-        }
     }
 
     private void moverDerecha() {
@@ -76,11 +63,9 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x + 1][celdaMovimiento.y].tipoCelda;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x + 1;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 3;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverDerecha();
-        }
     }
 
     private void moverIzquierda() {
@@ -88,20 +73,15 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x - 1][celdaMovimiento.y].tipoCelda;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x - 1;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = VEHICULO;
+
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverIzquierda();
-        }
     }
 
     @Override
     public void run() {
-        laberinto.lienzoPadre.repaint();
-        laberinto.lienzoPadre.validate();
         moverVehiculo();
         laberinto.lienzoPadre.repaint();
-        laberinto.lienzoPadre.validate();
     }
 
     private boolean noHayPersona(int x, int y) {
@@ -109,6 +89,5 @@ public class Micro extends TimerTask implements Constantes {
                 && laberinto.celdas[x][y].tipoCelda != PEATON
                 && laberinto.celdas[x][y].tipoCelda != VEHICULO
                 && laberinto.celdas[x][y].tipoCelda != MICRO;
-
     }
 }

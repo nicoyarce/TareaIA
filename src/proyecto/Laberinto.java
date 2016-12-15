@@ -1,4 +1,4 @@
-package ia;
+package proyecto;
 
 import java.awt.Graphics;
 import javax.swing.JComponent;
@@ -52,7 +52,7 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(33, 35, 0, 23);
         
         celdas[38][9].tipoCelda=PEATON;
-
+        celdas[13][2].tipoCelda=PORTAL;
     }
 
     @Override
