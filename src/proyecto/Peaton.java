@@ -55,7 +55,6 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
     }
 
     public void moverArriba() {
@@ -64,8 +63,6 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 2;
     }
 
     public void moverDerecha() {
@@ -74,8 +71,6 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 3;
     }
 
     public void moverIzquierda() {
@@ -84,8 +79,6 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
     }
 
     public void moverAbajo(Celda micro) {
@@ -96,7 +89,6 @@ public class Peaton extends TimerTask implements Constantes {
         celdaMovimiento.y = micro.y - 1 - npeaton;
         celdaMovimiento.x = micro.x;
         //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
     }
 
     public void moverArriba(Celda micro) {

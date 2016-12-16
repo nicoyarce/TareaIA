@@ -1,5 +1,6 @@
 package proyecto;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +15,7 @@ public class Celda extends JComponent implements Constantes {
     public int y;
     public char tipoCelda;
     public int indexSprite;
+    public int npeatones;
     public BufferedImage[] spriteJugador, spriteVehiculo;
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal,
@@ -53,7 +55,9 @@ public class Celda extends JComponent implements Constantes {
             case OBSTACULO:
                 //g.setColor(COLORAMARILLO);
                 // g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                g.setColor(Color.BLACK);
                 g.drawImage(obstaculo, x, y, this);
+                g.drawString(Integer.toString(npeatones), x+10, y+10);
                 break;
             case CAMINO:
                 break;
@@ -63,6 +67,7 @@ public class Celda extends JComponent implements Constantes {
             case EDIFICIO:
                 //g.setColor(COLORGRIS);
                 //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                
                 break;
             case PEATON:
                 g.drawImage(peaton, x, y, this);

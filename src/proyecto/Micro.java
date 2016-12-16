@@ -34,7 +34,7 @@ public class Micro extends TimerTask implements Constantes {
             if (noHayPersona(celdaMovimiento.x, celdaMovimiento.y + 1)) {
                 moverAbajo();
                 for (int i = 0; i < PEATONESMICRO; i++) {
-                    pasajeros[i].moverAbajo();
+                    pasajeros[i].moverAbajo(celdaMovimiento);
                 }
             }
         } else if (celdaMovimiento.x >= p1.x && celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
@@ -67,7 +67,6 @@ public class Micro extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
         for (int i = 0; i < PEATONESMICRO; i++) {
             pasajeros[i].moverAbajo();
         }
@@ -79,7 +78,6 @@ public class Micro extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.y = celdaMovimiento.y - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 2;
         for (int i = 0; i < PEATONESMICRO; i++) {
             pasajeros[i].moverArriba();
         }
@@ -91,7 +89,6 @@ public class Micro extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 3;
         for (int i = 0; i < PEATONESMICRO; i++) {
             pasajeros[i].moverDerecha();
         }
@@ -103,7 +100,6 @@ public class Micro extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
         celdaMovimiento.x = celdaMovimiento.x - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
         for (int i = 0; i < PEATONESMICRO; i++) {
             pasajeros[i].moverIzquierda();
         }

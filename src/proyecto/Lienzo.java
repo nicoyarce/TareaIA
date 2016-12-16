@@ -81,9 +81,19 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(micro1, 0, 1000);
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
-
+        imprimirMapa();
     }
-
+    
+    public void imprimirMapa(){
+        for(int i=0; i<N_CELDAS_ANCHO;i++){
+            for(int j=0; j<N_CELDAS_ALTO;j++){
+                System.out.print(laberinto.celdas[i][j].npeatones + " ");
+            }
+            System.out.println("");
+        }
+        
+    }
+    
     @Override
     public void update(Graphics g) {
         if (graficoBuffer == null) {
