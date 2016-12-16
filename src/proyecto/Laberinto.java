@@ -20,21 +20,20 @@ public class Laberinto extends JComponent implements Constantes {
         }
         //pongo unos edificios
         crearEdificio(1, 2, 2, 3); //obs
-        crearEdificio(2, 8, 0, 3); //edificio1
-        crearEdificio(2, 8, 3, 3);
-        crearEdificio(12, 31, 0, 3);
-        crearEdificio(31, 32, 2, 3); //obs
-        crearEdificio(0, 8, 7, 11);
-        crearEdificio(1, 3, 11, 12); //conos
-        crearEdificio(12, 30, 7, 10);
-        crearEdificio(12, 30, 7, 10);
+        crearEdificio(2, 8, 0, 3); //edificio0
+        crearEdificio(12, 20, 0, 3); //edificio1
+        crearEdificio(24, 32, 0, 3); //edificio2
+        crearEdificio(4, 8, 7, 19); //construccion y edificio abajo
+        crearEdificio(12, 20, 7, 10); //edificio3
+        crearEdificio(24, 32, 7, 10); //edificio4
         crearEdificio(4, 5, 19, 20); //grifo
-        crearEdificio(4, 8, 11, 19);
-        crearEdificio(13, 32, 14, 16);
-        crearEdificio(12, 13, 14, 15); //obs
-        crearEdificio(12, 32, 20, 22);
+        crearEdificio(12, 20, 14, 16); //edificio5
+        crearEdificio(24, 32, 14, 16); //edificio6
+        crearEdificio(24, 32, 14, 16); //obs
+        crearEdificio(12, 20, 20, 22); //edificio7
+        crearEdificio(24, 32, 20, 22); //edificio8
         crearEdificio(36, 40, 14, 22); //edificio rejas
-        crearEdificio(40, 41, 14, 18);
+        crearEdificio(40, 41, 14, 18);  //puerta edificio rejas
 
         crearEdificio(36, 37, 9, 10); //obs
         crearEdificio(37, 38, 7, 9); //estatua
@@ -47,12 +46,30 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(9, 35, 17, 19);
         crearCalle(1, 11, 21, 23);
         crearCalle(35, 36, 4, 6);
-        crearCalle(1, 3, 12, 21);
+        crearCalle(1, 3, 6, 21);
         crearCalle(9, 11, 0, 21);
         crearCalle(33, 35, 0, 23);
-        
-        celdas[38][9].tipoCelda=PEATON;
-        celdas[13][2].tipoCelda=PORTAL;
+        crearCalle(21, 23, 0, 23);
+
+        celdas[5][2].tipoCelda = PORTAL; //correo
+        celdas[6][18].tipoCelda = PORTAL;
+        celdas[38][9].tipoCelda = PEATON;
+        celdas[13][2].tipoCelda = PORTAL;
+        celdas[16][2].tipoCelda = PORTAL;
+        celdas[25][2].tipoCelda = PORTAL;
+        celdas[28][2].tipoCelda = PORTAL;
+        celdas[15][9].tipoCelda = PORTAL;
+        celdas[25][9].tipoCelda = PORTAL;
+        celdas[28][9].tipoCelda = PORTAL;
+        celdas[15][15].tipoCelda = PORTAL;
+        celdas[18][15].tipoCelda = PORTAL;
+        celdas[27][15].tipoCelda = PORTAL;
+        celdas[30][15].tipoCelda = PORTAL;
+        celdas[13][21].tipoCelda = PORTAL;
+        celdas[16][21].tipoCelda = PORTAL;
+        celdas[28][21].tipoCelda = PORTAL;
+        celdas[40][17].tipoCelda = PORTAL;
+
     }
 
     @Override

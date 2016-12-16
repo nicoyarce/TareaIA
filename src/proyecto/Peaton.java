@@ -8,7 +8,17 @@ public class Peaton extends TimerTask implements Constantes {
     public Laberinto laberinto;
     public Celda peaton, celdaMovimiento;
     public Point p1, p2, p3, p4;
-    
+    public int npeaton;
+
+    public Peaton(Laberinto laberinto, Point p, int n) {
+        this.laberinto = laberinto;
+        celdaMovimiento = new Celda(p.x, p.y, laberinto.celdas[p.x][p.y].tipoCelda);
+        peaton = new Celda(p.x, p.y, laberinto.celdas[p.x][p.y].tipoCelda);
+        laberinto.celdas[peaton.x][peaton.y].tipoCelda = PEATON;
+        npeaton = n;
+        laberinto.repaint();
+    }
+
     public Peaton(Laberinto laberinto, Point xp, Point yp) {
         p1 = new Point(xp.x, xp.y);
         p2 = new Point(yp.x, xp.y);
@@ -76,6 +86,50 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
 
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
+    }
+
+    public void moverAbajo(Celda micro) {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x][micro.y - 1 - npeaton].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+        celdaMovimiento.y = micro.y - 1 - npeaton;
+        celdaMovimiento.x = micro.x;
+        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+
+    }
+
+    public void moverArriba(Celda micro) {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x][micro.y + 1 + npeaton].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+        celdaMovimiento.y = micro.y + 1 + npeaton;
+        celdaMovimiento.x = micro.x;
+        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+
+    }
+
+    public void moverDerecha(Celda micro) {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x - 1 - npeaton][micro.y].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x - 1][celdaMovimiento.y].tipoCelda = temp;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+        celdaMovimiento.x = micro.x - 1 - npeaton;
+        celdaMovimiento.y = micro.y;
+        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+
+    }
+
+    public void moverIzquierda(Celda micro) {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x + 1 + npeaton][micro.y].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+        celdaMovimiento.x = micro.x + 1 + npeaton;
+        celdaMovimiento.y = micro.y;
+        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
+
     }
 
     public boolean noHayPared(int x, int y) {

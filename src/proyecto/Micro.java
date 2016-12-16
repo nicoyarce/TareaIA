@@ -8,7 +8,7 @@ public class Micro extends TimerTask implements Constantes {
     public Laberinto laberinto;
     public Celda micro, celdaMovimiento;
     public Point p1, p2, p3, p4;
-    public Peaton[] p;
+    public Peaton[] pasajeros;
     public int npeatones;
 
     public Micro(Laberinto laberinto, Point xp, Point yp) {
@@ -18,31 +18,45 @@ public class Micro extends TimerTask implements Constantes {
         p4 = new Point(xp.x, yp.y);
         this.laberinto = laberinto;
         celdaMovimiento = new Celda(p1.x, p1.y, laberinto.celdas[p1.x][p1.y].tipoCelda);
-        micro = new Celda(p1.x, p1.y, MICRO);        
-        npeatones=PEATONESMICRO;
-        p = new Peaton [PEATONESMICRO];
-        for (int i = 1; i <= npeatones; i++) {
-            xp.x=xp.x-i;
-            p[i-1] = new Peaton(laberinto, xp, yp);
+        micro = new Celda(celdaMovimiento.x, celdaMovimiento.y, MICRO);
+
+        pasajeros = new Peaton[PEATONESMICRO];
+        p1.x = micro.x - 1;
+        for (int i = 0; i < PEATONESMICRO; i++) {
+            pasajeros[i] = new Peaton(laberinto, p1, i);
+            p1.x--;
         }
+        laberinto.repaint();
     }
 
     private void moverVehiculo() {
         if (celdaMovimiento.x == p2.x && celdaMovimiento.y < p3.y && celdaMovimiento.y >= p2.y) {
             if (noHayPersona(celdaMovimiento.x, celdaMovimiento.y + 1)) {
                 moverAbajo();
+                for (int i = 0; i < PEATONESMICRO; i++) {
+                    pasajeros[i].moverAbajo();
+                }
             }
         } else if (celdaMovimiento.x >= p1.x && celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
             if (noHayPersona(celdaMovimiento.x + 1, celdaMovimiento.y)) {
                 moverDerecha();
+                for (int i = 0; i < PEATONESMICRO; i++) {
+                    pasajeros[i].moverDerecha(celdaMovimiento);
+                }
             }
         } else if (celdaMovimiento.x <= p3.x && celdaMovimiento.y == p3.y && celdaMovimiento.x > p4.x) {
             if (noHayPersona(celdaMovimiento.x - 1, celdaMovimiento.y)) {
                 moverIzquierda();
+                for (int i = 0; i < PEATONESMICRO; i++) {
+                    pasajeros[i].moverIzquierda(celdaMovimiento);
+                }
             }
         } else if (celdaMovimiento.x == p4.x && celdaMovimiento.y <= p4.y && celdaMovimiento.y >= p1.y) {
             if (noHayPersona(celdaMovimiento.x, celdaMovimiento.y - 1)) {
                 moverArriba();
+                for (int i = 0; i < PEATONESMICRO; i++) {
+                    pasajeros[i].moverArriba(celdaMovimiento);
+                }
             }
         }
     }
@@ -54,9 +68,9 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.y = celdaMovimiento.y + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 0;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverAbajo();
-        }        
+        for (int i = 0; i < PEATONESMICRO; i++) {
+            pasajeros[i].moverAbajo();
+        }
     }
 
     private void moverArriba() {
@@ -66,8 +80,8 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.y = celdaMovimiento.y - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 2;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverArriba();
+        for (int i = 0; i < PEATONESMICRO; i++) {
+            pasajeros[i].moverArriba();
         }
     }
 
@@ -78,8 +92,8 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.x = celdaMovimiento.x + 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 3;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverDerecha();
+        for (int i = 0; i < PEATONESMICRO; i++) {
+            pasajeros[i].moverDerecha();
         }
     }
 
@@ -90,8 +104,8 @@ public class Micro extends TimerTask implements Constantes {
         celdaMovimiento.x = celdaMovimiento.x - 1;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].indexSprite = 1;
-        for (int i = 0; i < npeatones; i++) {
-            p[i].moverIzquierda();
+        for (int i = 0; i < PEATONESMICRO; i++) {
+            pasajeros[i].moverIzquierda();
         }
     }
 

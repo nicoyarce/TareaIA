@@ -1,4 +1,5 @@
 package proyecto;
+
 import inteligencia.Estado;
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -16,9 +17,9 @@ public class Lienzo extends Canvas implements Constantes {
     public Laberinto laberinto;
     public Image fondo;
 
-    public Vehiculo auto, auto2;
+    public Vehiculo auto1, auto2, auto3, auto4;
     public Peaton peaton, peaton2;
-    public Jugador jugador; 
+    public Jugador jugador;
     public Micro micro1;
     public Timer lanzadorTareas;
     public Carta carta;
@@ -26,19 +27,30 @@ public class Lienzo extends Canvas implements Constantes {
     public Image imagenBuffer;
 
     public Lienzo() {
-        Point p1 = new Point(10, 5);
-        Point p2 = new Point(33, 11);
-        Point p3 = new Point(10, 12);
-        Point p4 = new Point(33, 17);
-        Point p5 = new Point(11, 13);
-        Point p6 = new Point(32, 19);
-        Point p7 = new Point(10,5);
-        Point p8 = new Point(33,18);
+        Point p1 = new Point(2, 5);
+        Point p2 = new Point(9, 21);
+        Point p3 = new Point(10, 5);
+        Point p4 = new Point(21, 11);
+        Point p5 = new Point(10, 12);
+        Point p6 = new Point(21, 17);
+        Point p7 = new Point(22, 12);
+        Point p8 = new Point(33, 17);
+
+        Point p9 = new Point(11, 13);
+        Point p10 = new Point(32, 19);
+
+        Point p11 = new Point(22, 5);
+        Point p12 = new Point(33, 11);
+
         laberinto = new Laberinto(this);
-        auto = new Vehiculo(laberinto, p1, p2);
+        auto1 = new Vehiculo(laberinto, p1, p2);
         auto2 = new Vehiculo(laberinto, p3, p4);
-        peaton = new Peaton(laberinto, p5, p6);
-        micro1 = new Micro(laberinto, p7, p8);
+        auto3 = new Vehiculo(laberinto, p5, p6);
+        auto4 = new Vehiculo(laberinto, p7, p8);
+
+        peaton = new Peaton(laberinto, p9, p10);
+        micro1 = new Micro(laberinto, p11, p12);
+
         jugador = new Jugador(laberinto);
         carta = new Carta(laberinto);
         try {
@@ -55,17 +67,21 @@ public class Lienzo extends Canvas implements Constantes {
                 laberinto.lienzoPadre.repaint();
             }
         });
-        
-        jugador.inteligencia.destinos.add(new Estado(13,2,'N',null));
-        
-        
+
+        jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));
+
         lanzadorTareas = new Timer();
-        //lanzadorTareas.scheduleAtFixedRate(auto, 0, 500);
-        lanzadorTareas.scheduleAtFixedRate(auto2, 0, 400);
+
+        lanzadorTareas.scheduleAtFixedRate(auto1, 0, 400);
+        lanzadorTareas.scheduleAtFixedRate(auto2, 0, 300);
+        lanzadorTareas.scheduleAtFixedRate(auto3, 0, 600);
+        lanzadorTareas.scheduleAtFixedRate(auto4, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
-        lanzadorTareas.scheduleAtFixedRate(micro1, 0, 600);
-        lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 200);
-        
+        lanzadorTareas.scheduleAtFixedRate(micro1, 0, 1000);
+        //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
+
     }
 
     @Override

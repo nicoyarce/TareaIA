@@ -19,7 +19,7 @@ public interface Constantes {
     public final char MICRO = 'M';
     public final char PORTAL = 'R';
     //nuevas constantes
-    public final char EDIFICIO = 'E';    
+    public final char EDIFICIO = 'E';
     public final char PEATON = 'P';
     public final char CALLE = 'C';
     public final int PEATONESMICRO = 3;
@@ -28,6 +28,7 @@ public interface Constantes {
     public final int ALFA = 150;
     public final Color COLORGRIS = new Color(192, 192, 192, ALFA);
     public final Color COLORAMARILLO = new Color(255, 255, 128, ALFA);
+    public final Color COLORAZUL = new Color(0, 191, 255, ALFA);
 
     default int numeroAleatorio(int minimo, int maximo) {
         Random random = new Random();

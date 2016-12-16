@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 public class Celda extends JComponent implements Constantes {
+
     //atributos
     public int x;
     public int y;
@@ -15,7 +16,7 @@ public class Celda extends JComponent implements Constantes {
     public int indexSprite;
     public BufferedImage[] spriteJugador, spriteVehiculo;
     //nuevos atributos para manejar imagenes
-    public BufferedImage jugador, obstaculo, camino, vehiculo, portal, 
+    public BufferedImage jugador, obstaculo, camino, vehiculo, portal,
             edificio, acera, carretera, peaton, micro;
 
     //constructor, inicializa los atributos
@@ -35,7 +36,6 @@ public class Celda extends JComponent implements Constantes {
             carretera = ImageIO.read(new File("images/carretera.png"));
             peaton = ImageIO.read(new File("images/peaton.png"));
             jugador = ImageIO.read(new File("images/jugador.png"));
-            
 
             spriteJugador = cargarSprite(jugador, 2, 2);
             spriteVehiculo = cargarSprite(vehiculo, 2, 2);
@@ -51,27 +51,28 @@ public class Celda extends JComponent implements Constantes {
                 g.drawImage(spriteJugador[indexSprite], x, y, null);
                 break;
             case OBSTACULO:
+                //g.setColor(COLORAMARILLO);
+                // g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 g.drawImage(obstaculo, x, y, this);
                 break;
             case CAMINO:
-                //g.setColor(COLORGRIS);
-                //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case VEHICULO:
                 g.drawImage(spriteVehiculo[indexSprite], x, y, this);
                 break;
             case EDIFICIO:
-                g.drawImage(edificio, x, y, this);
+                //g.setColor(COLORGRIS);
+                //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case PEATON:
                 g.drawImage(peaton, x, y, this);
                 break;
             case CALLE:
-                //g.setColor(COLORAMARILLO);
-                //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
-            break;
+
+                break;
             case PORTAL:
-                g.drawImage(portal, x, y, this);
+                g.setColor(COLORAZUL);
+                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case MICRO:
                 g.drawImage(micro, x, y, this);
