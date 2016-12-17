@@ -49,7 +49,7 @@ public class Lienzo extends Canvas implements Constantes {
         auto4 = new Vehiculo(laberinto, p7, p8);
 
         peaton = new Peaton(laberinto, p9, p10);
-        micro1 = new Micro(laberinto, p11, p12);
+        //micro1 = new Micro(laberinto, p11, p12);
 
         jugador = new Jugador(laberinto);
         carta = new Carta(laberinto);
@@ -67,21 +67,26 @@ public class Lienzo extends Canvas implements Constantes {
                 laberinto.lienzoPadre.repaint();
             }
         });
-
+        /*Busqueda multiobjetivos
         jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
-        jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));
-
+        jugador.inteligencia.destinos.add(new Estado(13, 21, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));*/
+        
+        //Busqueda informada
+        jugador.inteligenciainf.buscar(0,0,40,17);
+        jugador.inteligenciainf.calcularRuta(); 
+        
         lanzadorTareas = new Timer();
-
         lanzadorTareas.scheduleAtFixedRate(auto1, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(auto2, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(auto3, 0, 600);
         lanzadorTareas.scheduleAtFixedRate(auto4, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
-        lanzadorTareas.scheduleAtFixedRate(micro1, 0, 1000);
+        //lanzadorTareas.scheduleAtFixedRate(micro1, 0, 1000);
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
-        imprimirMapa();
+        lanzadorTareas.scheduleAtFixedRate(jugador.inteligenciainf, 0, 300);
     }
     
     public void imprimirMapa(){

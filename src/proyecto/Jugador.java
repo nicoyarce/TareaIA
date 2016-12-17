@@ -16,16 +16,18 @@ public class Jugador implements Constantes {
     public Laberinto laberinto;
     public Celda jugador, celdaMovimiento;
     public BusquedaAnchura inteligencia;
+    public BusquedaAnchuraInf inteligenciainf;
     public Carta carta;
     public int nCartas = NCARTAS;
     
 
     public Jugador(Laberinto laberinto) {
         this.laberinto = laberinto;
-        celdaMovimiento = new Celda(0, 0, laberinto.celdas[0][0].tipoCelda);
-        jugador = new Celda(0, 0, JUGADOR);
+        celdaMovimiento = new Celda(1, 1, laberinto.celdas[1][1].tipoCelda);
+        jugador = new Celda(1, 1, JUGADOR);
         laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
         inteligencia = new BusquedaAnchura(laberinto, this);
+        inteligenciainf = new BusquedaAnchuraInf(laberinto);
         carta = new Carta(laberinto);
     }
 
