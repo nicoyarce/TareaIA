@@ -67,17 +67,17 @@ public class Lienzo extends Canvas implements Constantes {
                 laberinto.lienzoPadre.repaint();
             }
         });
-        /*Busqueda multiobjetivos
+        /*//Busqueda multiobjetivos
         jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(13, 21, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));*/
-        
+
         //Busqueda informada
-        jugador.inteligenciainf.buscar(0,0,40,17);
-        jugador.inteligenciainf.calcularRuta(); 
-        
+        jugador.inteligenciainf.buscar(0, 0, 13, 21);
+        jugador.inteligenciainf.calcularRuta();
+
         lanzadorTareas = new Timer();
         lanzadorTareas.scheduleAtFixedRate(auto1, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(auto2, 0, 300);
@@ -88,17 +88,7 @@ public class Lienzo extends Canvas implements Constantes {
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(jugador.inteligenciainf, 0, 300);
     }
-    
-    public void imprimirMapa(){
-        for(int i=0; i<N_CELDAS_ANCHO;i++){
-            for(int j=0; j<N_CELDAS_ALTO;j++){
-                System.out.print(laberinto.celdas[i][j].npeatones + " ");
-            }
-            System.out.println("");
-        }
-        
-    }
-    
+
     @Override
     public void update(Graphics g) {
         if (graficoBuffer == null) {

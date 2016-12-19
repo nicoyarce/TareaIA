@@ -57,9 +57,11 @@ public class Celda extends JComponent implements Constantes {
                 // g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 g.setColor(Color.BLACK);
                 g.drawImage(obstaculo, x, y, this);
-                g.drawString(Integer.toString(npeatones), x+10, y+10);
+                g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case CAMINO:
+                g.setColor(Color.BLACK);
+                g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case VEHICULO:
                 g.drawImage(spriteVehiculo[indexSprite], x, y, this);
@@ -67,13 +69,14 @@ public class Celda extends JComponent implements Constantes {
             case EDIFICIO:
                 //g.setColor(COLORGRIS);
                 //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
-                
+
                 break;
             case PEATON:
                 g.drawImage(peaton, x, y, this);
                 break;
             case CALLE:
-
+                g.setColor(Color.WHITE);
+                g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case PORTAL:
                 g.setColor(COLORAZUL);

@@ -19,7 +19,6 @@ public class Jugador implements Constantes {
     public BusquedaAnchuraInf inteligenciainf;
     public Carta carta;
     public int nCartas = NCARTAS;
-    
 
     public Jugador(Laberinto laberinto) {
         this.laberinto = laberinto;
@@ -92,7 +91,6 @@ public class Jugador implements Constantes {
 
     private boolean noVieneVehiculo(int x, int y, char mov) {
         if (celdaMovimiento.tipoCelda == CAMINO) {
-            System.out.println("Esta en camino");
             switch (mov) {
                 case 'D':
                     if (x - 4 > 0 && x + 4 < N_CELDAS_ANCHO && y > 0 && y + 2 < N_CELDAS_ALTO) {
