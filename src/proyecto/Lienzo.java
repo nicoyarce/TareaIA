@@ -75,7 +75,7 @@ public class Lienzo extends Canvas implements Constantes {
         jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));*/
 
         //Busqueda informada
-        jugador.inteligenciainf.buscar(0, 0, 13, 21);
+        jugador.inteligenciainf.buscar(0, 0, 28, 21);
         jugador.inteligenciainf.calcularRuta();
 
         lanzadorTareas = new Timer();
