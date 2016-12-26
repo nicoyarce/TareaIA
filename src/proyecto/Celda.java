@@ -20,6 +20,7 @@ public class Celda extends JComponent implements Constantes {
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal,
             edificio, acera, carretera, peaton, micro, carta;
+    public Jugador j;
 
     //constructor, inicializa los atributos
     public Celda(int x, int y, char tipo) {
@@ -52,10 +53,13 @@ public class Celda extends JComponent implements Constantes {
         switch (tipoCelda) {
             case JUGADOR:
                 g.drawImage(spriteJugador[indexSprite], x, y, null);
+                for (int i = 0; i < Jugador.nCartas; i++) {
+                    g.drawImage(carta, x - 25 + i * 10, y - 25, this);
+                }
                 break;
             case OBSTACULO:
-                //g.setColor(COLORAMARILLO);
-                // g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                g.setColor(COLORAMARILLO);
+                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 g.setColor(Color.BLACK);
                 g.drawImage(obstaculo, x, y, this);
                 g.drawString(Integer.toString(npeatones), x + 10, y + 10);
@@ -66,10 +70,6 @@ public class Celda extends JComponent implements Constantes {
                 break;
             case VEHICULO:
                 g.drawImage(spriteVehiculo[indexSprite], x, y, this);
-                break;
-            case EDIFICIO:
-                //g.setColor(COLORGRIS);
-                //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case PEATON:
                 g.drawImage(peaton, x, y, this);
@@ -85,8 +85,9 @@ public class Celda extends JComponent implements Constantes {
             case MICRO:
                 g.drawImage(micro, x, y, this);
                 break;
-            case CARTA:
-                g.drawImage(carta, x, y, this);
+            case PARADA:
+                g.setColor(COLORGRIS);
+                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
         }
     }

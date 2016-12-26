@@ -12,8 +12,7 @@ public class Jugador implements Constantes {
     public Laberinto laberinto;
     public Celda jugador, celdaMovimiento;
     public BusquedaAnchura inteligencia;
-    public Point p1, p2, p3, p4;
-    public ArrayList<Carta> cartas = new ArrayList<>();
+    public static int nCartas;
 
     public Jugador(Laberinto laberinto, int x, int y) {
         this.laberinto = laberinto;
@@ -21,13 +20,7 @@ public class Jugador implements Constantes {
         jugador = new Celda(x, y, JUGADOR);
         laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
         inteligencia = new BusquedaAnchura(laberinto, this);
-
-        Point p1 = new Point(jugador.x, jugador.y - 1);
-        for (int i = 0; i < NCARTAS; i++) {
-            p1.x--;
-            cartas.add(new Carta(laberinto, p1));
-        }
-        laberinto.repaint();
+        nCartas = NCARTAS;
     }
 
     void moverCelda(KeyEvent evento) {
@@ -54,9 +47,6 @@ public class Jugador implements Constantes {
     public boolean moverCeldaArriba() {
         if (jugador.y > 0) {
             if (noHayPared(jugador.x, jugador.y - 1) && noVieneVehiculo(jugador.x, jugador.y, 'U')) {
-                for (int i = 0; i < NCARTAS; i++) {
-                    cartas.get(i).moverCarta('U');
-                }
                 avanzar(jugador.x, jugador.y - 1, 'U');
                 return true;
             }
@@ -67,9 +57,6 @@ public class Jugador implements Constantes {
     public boolean moverCeldaAbajo() {
         if (jugador.y + 1 < N_CELDAS_ALTO) {
             if (noHayPared(jugador.x, jugador.y + 1) && noVieneVehiculo(jugador.x, jugador.y, 'D')) {
-                for (int i = 0; i < NCARTAS; i++) {
-                    cartas.get(i).moverCarta('D');
-                }
                 avanzar(jugador.x, jugador.y + 1, 'D');
                 return true;
             }
@@ -80,9 +67,6 @@ public class Jugador implements Constantes {
     public boolean moverCeldaIzquierda() {
         if (jugador.x > 0) {
             if (noHayPared(jugador.x - 1, jugador.y) && noVieneVehiculo(jugador.x, jugador.y, 'L')) {
-                for (int i = 0; i < NCARTAS; i++) {
-                    cartas.get(i).moverCarta('L');
-                }
                 avanzar(jugador.x - 1, jugador.y, 'L');
                 return true;
             }
@@ -93,9 +77,6 @@ public class Jugador implements Constantes {
     public boolean moverCeldaDerecha() {
         if (jugador.x + 1 < N_CELDAS_ANCHO) {
             if (noHayPared(jugador.x + 1, jugador.y) && noVieneVehiculo(jugador.x, jugador.y, 'R')) {
-                for (int i = 0; i < NCARTAS; i++) {
-                    cartas.get(i).moverCarta('R');
-                }
                 avanzar(jugador.x + 1, jugador.y, 'R');
                 return true;
             }
@@ -108,6 +89,10 @@ public class Jugador implements Constantes {
                 && laberinto.celdas[x][y].tipoCelda != VEHICULO
                 && laberinto.celdas[x][y].tipoCelda != PEATON
                 && laberinto.celdas[x][y].tipoCelda != MICRO;
+    }
+
+    public boolean esPortal(int x, int y) {
+        return laberinto.celdas[x][y].tipoCelda == PORTAL;
     }
 
     private boolean noVieneVehiculo(int x, int y, char mov) {
@@ -174,8 +159,7 @@ public class Jugador implements Constantes {
         laberinto.lienzoPadre.repaint();
         laberinto.lienzoPadre.validate();
         char temp;
-
-        System.out.println(x + " " + y);
+        System.out.println(x + " " + y + " Cartas: " + nCartas);
         switch (mov) {
             case 'D':
                 temp = celdaMovimiento.tipoCelda;
@@ -186,6 +170,9 @@ public class Jugador implements Constantes {
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 0;
                 break;
             case 'U':
+                if (esPortal(jugador.x, jugador.y - 1)) {
+                    nCartas--;
+                }
                 temp = celdaMovimiento.tipoCelda;
                 celdaMovimiento.tipoCelda = laberinto.celdas[x][y].tipoCelda;
                 laberinto.celdas[x][y + 1].tipoCelda = temp;
@@ -195,7 +182,6 @@ public class Jugador implements Constantes {
                 break;
             case 'R':
                 temp = celdaMovimiento.tipoCelda;
-
                 celdaMovimiento.tipoCelda = laberinto.celdas[x][y].tipoCelda;
                 laberinto.celdas[x - 1][y].tipoCelda = temp;
                 laberinto.celdas[x][y].tipoCelda = JUGADOR;

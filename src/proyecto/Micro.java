@@ -3,6 +3,7 @@ package proyecto;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.TimerTask;
+import javax.swing.JOptionPane;
 
 public class Micro extends TimerTask implements Constantes {
 
@@ -24,7 +25,6 @@ public class Micro extends TimerTask implements Constantes {
             xp.x--;
             pasajeros.add(new Peaton(laberinto, xp, p1, yp));
         }
-        laberinto.repaint();
     }
 
     private void moverMicro() {
@@ -45,6 +45,7 @@ public class Micro extends TimerTask implements Constantes {
                 moverArriba();
             }
         }
+
     }
 
     private void moverAbajo() {
@@ -52,10 +53,18 @@ public class Micro extends TimerTask implements Constantes {
             char t = celdaMovimiento.tipoCelda;
             celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y + 1].tipoCelda;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = t;
-
             celdaMovimiento.y = celdaMovimiento.y + 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-
+            if (esParada(celdaMovimiento.x, celdaMovimiento.y + 1)) {
+                System.out.println("PASO POR PARADA");
+                if (pasajeros.size() <= 0) {
+                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                } else {
+                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
+                    pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
+                    pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
+                }
+            }
         }
     }
 
@@ -66,20 +75,36 @@ public class Micro extends TimerTask implements Constantes {
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = t;
             celdaMovimiento.x = celdaMovimiento.x + 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-
+            if (esParada(celdaMovimiento.x + 1, celdaMovimiento.y)) {
+                System.out.println("PASO POR PARADA");
+                if (pasajeros.size() <= 0) {
+                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                } else {
+                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
+                    pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
+                    pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
+                }
+            }
         }
     }
 
     private void moverIzquierda() {
         if (celdaMovimiento.x > 0 && noHayPersona(celdaMovimiento.x - 1, celdaMovimiento.y)) {
-
             char t = celdaMovimiento.tipoCelda;
             celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x - 1][celdaMovimiento.y].tipoCelda;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = t;
-
             celdaMovimiento.x = celdaMovimiento.x - 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-
+            if (esParada(celdaMovimiento.x - 1, celdaMovimiento.y)) {
+                JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                if (pasajeros.size() <= 0) {
+                    //System.out.println("TODOS LOS PEATONES HAN SIDO DEJADOS");
+                } else {
+                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
+                    pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
+                    pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
+                }
+            }
         }
     }
 
@@ -87,12 +112,19 @@ public class Micro extends TimerTask implements Constantes {
         if (celdaMovimiento.y > 0 && noHayPersona(celdaMovimiento.x, celdaMovimiento.y - 1)) {
             char t = celdaMovimiento.tipoCelda;
             celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y - 1].tipoCelda;
-
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = t;
-
             celdaMovimiento.y = celdaMovimiento.y - 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
-
+            if (esParada(celdaMovimiento.x, celdaMovimiento.y - 1)) {
+                System.out.println("PASO POR PARADA");
+                if (pasajeros.size() <= 0) {
+                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                } else {
+                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
+                    pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
+                    pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
+                }
+            }
         }
     }
 
@@ -103,7 +135,7 @@ public class Micro extends TimerTask implements Constantes {
         moverMicro();
         laberinto.lienzoPadre.repaint();
         laberinto.lienzoPadre.validate();
-        for (int i = 0; i < NPEATONES; i++) {
+        for (int i = 0; i < pasajeros.size(); i++) {
             pasajeros.get(i).moverPeaton();
         }
     }
@@ -115,5 +147,9 @@ public class Micro extends TimerTask implements Constantes {
                 && laberinto.celdas[x][y].tipoCelda != MICRO
                 && laberinto.celdas[x][y].tipoCelda != CARTA;
 
+    }
+
+    private boolean esParada(int x, int y) {
+        return laberinto.celdas[x][y].tipoCelda == PARADA;
     }
 }

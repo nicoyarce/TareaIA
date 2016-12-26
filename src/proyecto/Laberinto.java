@@ -42,13 +42,12 @@ public class Laberinto extends JComponent implements Constantes {
         crearPeatones(11, 21, 19, 23);
         crearEdificio(24, 32, 20, 22); //edificio8
         crearPeatones(23, 33, 19, 23);
-        crearEdificio(36, 40, 14, 22); //edificio rejas
-        crearEdificio(40, 41, 14, 18);  //puerta edificio rejas
+        crearEdificio(36, 41, 14, 22); //edificio rejas
         crearPeatones(35, 41, 13, 23);
+
         crearPeatones(35, 41, 0, 4);
         crearPeatones(35, 41, 6, 11);
 
-        crearEdificio(36, 37, 9, 10); //obs
         crearEdificio(37, 38, 7, 9); //estatua
         crearEdificio(40, 41, 8, 9); //carro
         crearEdificio(36, 37, 0, 2); //banca
@@ -81,8 +80,9 @@ public class Laberinto extends JComponent implements Constantes {
         celdas[13][21].tipoCelda = PORTAL;
         celdas[16][21].tipoCelda = PORTAL;
         celdas[28][21].tipoCelda = PORTAL;
-        celdas[40][17].tipoCelda = PORTAL;
+        celdas[38][21].tipoCelda = PORTAL;
 
+        celdas[31][5].tipoCelda = PARADA;
     }
 
     @Override

@@ -51,6 +51,18 @@ public class Peaton extends TimerTask implements Constantes {
         }
     }
 
+    public void serCalleAbajo() {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y + 1].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+    }
+
+    public void serCalleArriba() {
+        char temp = celdaMovimiento.tipoCelda;
+        celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y - 1].tipoCelda;
+        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
+    }
+
     public void moverAbajo() {
         char temp = celdaMovimiento.tipoCelda;
         celdaMovimiento.tipoCelda = laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y + 1].tipoCelda;

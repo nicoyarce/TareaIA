@@ -21,7 +21,6 @@ public class Lienzo extends Canvas implements Constantes {
     public Jugador jugador;
     public Micro micro;
     public Timer lanzadorTareas;
-    public Carta carta;
     public Graphics graficoBuffer;
     public Image imagenBuffer;
 
@@ -84,7 +83,7 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas.scheduleAtFixedRate(auto3, 0, 600);
         lanzadorTareas.scheduleAtFixedRate(auto4, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
-        lanzadorTareas.scheduleAtFixedRate(micro, 0, 1000);
+        lanzadorTareas.scheduleAtFixedRate(micro, 0, 300);
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
     }
 
