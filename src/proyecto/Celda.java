@@ -19,7 +19,7 @@ public class Celda extends JComponent implements Constantes {
     public BufferedImage[] spriteJugador, spriteVehiculo;
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal,
-            edificio, acera, carretera, peaton, micro;
+            edificio, acera, carretera, peaton, micro, carta;
 
     //constructor, inicializa los atributos
     public Celda(int x, int y, char tipo) {
@@ -38,6 +38,7 @@ public class Celda extends JComponent implements Constantes {
             carretera = ImageIO.read(new File("images/carretera.png"));
             peaton = ImageIO.read(new File("images/peaton.png"));
             jugador = ImageIO.read(new File("images/jugador.png"));
+            carta = ImageIO.read(new File("images/carta.png"));
 
             spriteJugador = cargarSprite(jugador, 2, 2);
             spriteVehiculo = cargarSprite(vehiculo, 2, 2);
@@ -60,8 +61,8 @@ public class Celda extends JComponent implements Constantes {
                 g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case CAMINO:
-                g.setColor(Color.BLACK);
-                g.drawString(Integer.toString(npeatones), x + 10, y + 10);
+                //g.setColor(Color.BLACK);
+                //g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case VEHICULO:
                 g.drawImage(spriteVehiculo[indexSprite], x, y, this);
@@ -69,7 +70,6 @@ public class Celda extends JComponent implements Constantes {
             case EDIFICIO:
                 //g.setColor(COLORGRIS);
                 //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
-
                 break;
             case PEATON:
                 g.drawImage(peaton, x, y, this);
@@ -80,10 +80,13 @@ public class Celda extends JComponent implements Constantes {
                 break;
             case PORTAL:
                 g.setColor(COLORAZUL);
-                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                g.drawOval(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
             case MICRO:
                 g.drawImage(micro, x, y, this);
+                break;
+            case CARTA:
+                g.drawImage(carta, x, y, this);
                 break;
         }
     }

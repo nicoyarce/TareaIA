@@ -108,7 +108,7 @@ public class Laberinto extends JComponent implements Constantes {
     }
 
     private void crearPeatones(int x1, int x2, int y1, int y2) {
-        int random = (int) Math.floor(Math.random() * (101));
+        int random = numeroAleatorio(1, 100);
         for (int i = x1; i < x2; i++) {
             for (int j = y1; j < y2; j++) {
                 celdas[i][j].npeatones = random;
@@ -117,10 +117,11 @@ public class Laberinto extends JComponent implements Constantes {
     }
 
     private void crearCalle(int x1, int x2, int y1, int y2) {
+        int random = numeroAleatorio(1, 100);
         for (int i = x1; i < x2; i++) {
             for (int j = y1; j < y2; j++) {
                 celdas[i][j].tipoCelda = CALLE;
-                celdas[i][j].npeatones = 200;
+                celdas[i][j].npeatones = random;
             }
         }
     }

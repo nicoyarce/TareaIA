@@ -22,8 +22,10 @@ public interface Constantes {
     public final char EDIFICIO = 'E';
     public final char PEATON = 'P';
     public final char CALLE = 'C';
-    public final int PEATONESMICRO = 3;
-    public final int NCARTAS = 5;
+    public final char CARTA = 'A';
+    public final int NPEATONES = 2;
+    public final int NCARTAS = 2;
+    public final int NPORTALES = 2;
 
     public final int ALFA = 150;
     public final Color COLORGRIS = new Color(192, 192, 192, ALFA);

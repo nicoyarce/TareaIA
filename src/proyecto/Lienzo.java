@@ -16,11 +16,10 @@ public class Lienzo extends Canvas implements Constantes {
 
     public Laberinto laberinto;
     public Image fondo;
-
     public Vehiculo auto1, auto2, auto3, auto4;
     public Peaton peaton, peaton2;
     public Jugador jugador;
-    public Micro micro1;
+    public Micro micro;
     public Timer lanzadorTareas;
     public Carta carta;
     public Graphics graficoBuffer;
@@ -49,10 +48,11 @@ public class Lienzo extends Canvas implements Constantes {
         auto4 = new Vehiculo(laberinto, p7, p8);
 
         peaton = new Peaton(laberinto, p9, p10);
-        //micro1 = new Micro(laberinto, p11, p12);
 
-        jugador = new Jugador(laberinto);
-        carta = new Carta(laberinto);
+        micro = new Micro(laberinto, p11, p12);
+
+        jugador = new Jugador(laberinto, 10, 10);
+
         try {
             fondo = ImageIO.read(new File("images/fondo.png"));
         } catch (IOException e) {
@@ -67,16 +67,16 @@ public class Lienzo extends Canvas implements Constantes {
                 laberinto.lienzoPadre.repaint();
             }
         });
-        /*//Busqueda multiobjetivos
-        jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
-        jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
-        jugador.inteligencia.destinos.add(new Estado(13, 21, 'N', null));
-        jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
-        jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));*/
 
-        //Busqueda informada
-        jugador.inteligenciainf.buscar(0, 0, 28, 21);
-        jugador.inteligenciainf.calcularRuta();
+        jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
+        //jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(13, 21, 'N', null));
+        //jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
+        //jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));
+
+        jugador.inteligencia.buscar(jugador.celdaMovimiento.x, jugador.celdaMovimiento.y, jugador.inteligencia.destinos.get(jugador.inteligencia.nDestinos - 1));
+        jugador.inteligencia.calcularRuta();
+        jugador.inteligencia.nDestinos--;
 
         lanzadorTareas = new Timer();
         lanzadorTareas.scheduleAtFixedRate(auto1, 0, 400);
@@ -84,9 +84,8 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas.scheduleAtFixedRate(auto3, 0, 600);
         lanzadorTareas.scheduleAtFixedRate(auto4, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
-        //lanzadorTareas.scheduleAtFixedRate(micro1, 0, 1000);
+        lanzadorTareas.scheduleAtFixedRate(micro, 0, 1000);
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
-        lanzadorTareas.scheduleAtFixedRate(jugador.inteligenciainf, 0, 300);
     }
 
     @Override

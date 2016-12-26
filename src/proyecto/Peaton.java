@@ -7,16 +7,18 @@ public class Peaton extends TimerTask implements Constantes {
 
     public Laberinto laberinto;
     public Celda peaton, celdaMovimiento;
-    public Point p1, p2, p3, p4;
-    public int npeaton;
+    public Point p1, p2, p3, p4, xp;
 
-    public Peaton(Laberinto laberinto, Point p, int n) {
+    public Peaton(Laberinto laberinto, Point xp, Point p1, Point yp) {
+        this.xp = new Point(xp.x, xp.y);
+        p2 = new Point(yp.x, xp.y);
+        p3 = new Point(yp.x, yp.y);
+        p4 = new Point(xp.x, yp.y);
+
         this.laberinto = laberinto;
-        celdaMovimiento = new Celda(p.x, p.y, laberinto.celdas[p.x][p.y].tipoCelda);
-        peaton = new Celda(p.x, p.y, laberinto.celdas[p.x][p.y].tipoCelda);
-        laberinto.celdas[peaton.x][peaton.y].tipoCelda = PEATON;
-        npeaton = n;
-        laberinto.repaint();
+        celdaMovimiento = new Celda(this.xp.x, this.xp.y, laberinto.celdas[this.xp.x][this.xp.y].tipoCelda);
+        peaton = new Celda(this.xp.x, this.xp.y, PEATON);
+        this.p1 = p1;
     }
 
     public Peaton(Laberinto laberinto, Point xp, Point yp) {
@@ -34,15 +36,15 @@ public class Peaton extends TimerTask implements Constantes {
             if (noHayPared(celdaMovimiento.x, celdaMovimiento.y + 1)) {
                 moverAbajo();
             }
-        } else if (celdaMovimiento.x >= p1.x && celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
+        } else if (celdaMovimiento.y == p1.y && celdaMovimiento.x < p2.x) {
             if (noHayPared(celdaMovimiento.x + 1, celdaMovimiento.y)) {
                 moverDerecha();
             }
-        } else if (celdaMovimiento.x <= p3.x && celdaMovimiento.y == p3.y && celdaMovimiento.x > p4.x) {
+        } else if (celdaMovimiento.x <= p3.x && celdaMovimiento.y == p3.y && celdaMovimiento.x > p1.x) {
             if (noHayPared(celdaMovimiento.x - 1, celdaMovimiento.y)) {
                 moverIzquierda();
             }
-        } else if (celdaMovimiento.x == p4.x && celdaMovimiento.y <= p4.y && celdaMovimiento.y >= p1.y) {
+        } else if (celdaMovimiento.x == p1.x && celdaMovimiento.y <= p4.y && celdaMovimiento.y >= p1.y) {
             if (noHayPared(celdaMovimiento.x, celdaMovimiento.y - 1)) {
                 moverArriba();
             }
@@ -81,52 +83,13 @@ public class Peaton extends TimerTask implements Constantes {
         laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
     }
 
-    public void moverAbajo(Celda micro) {
-        char temp = celdaMovimiento.tipoCelda;
-        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x][micro.y - 1 - npeaton].tipoCelda;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-        celdaMovimiento.y = micro.y - 1 - npeaton;
-        celdaMovimiento.x = micro.x;
-        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-    }
-
-    public void moverArriba(Celda micro) {
-        char temp = celdaMovimiento.tipoCelda;
-        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x][micro.y + 1 + npeaton].tipoCelda;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-        celdaMovimiento.y = micro.y + 1 + npeaton;
-        celdaMovimiento.x = micro.x;
-        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-    }
-
-    public void moverDerecha(Celda micro) {
-        char temp = celdaMovimiento.tipoCelda;
-        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x - 1 - npeaton][micro.y].tipoCelda;
-        laberinto.celdas[celdaMovimiento.x - 1][celdaMovimiento.y].tipoCelda = temp;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-        celdaMovimiento.x = micro.x - 1 - npeaton;
-        celdaMovimiento.y = micro.y;
-        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-    }
-
-    public void moverIzquierda(Celda micro) {
-        char temp = celdaMovimiento.tipoCelda;
-        celdaMovimiento.tipoCelda = laberinto.celdas[micro.x + 1 + npeaton][micro.y].tipoCelda;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = temp;
-        laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-        celdaMovimiento.x = micro.x + 1 + npeaton;
-        celdaMovimiento.y = micro.y;
-        //laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = PEATON;
-
-    }
-
     public boolean noHayPared(int x, int y) {
         return laberinto.celdas[x][y].tipoCelda != VEHICULO
-                && laberinto.celdas[x][y].tipoCelda != JUGADOR;
+                && laberinto.celdas[x][y].tipoCelda != JUGADOR
+                && laberinto.celdas[x][y].tipoCelda != PEATON
+                && laberinto.celdas[x][y].tipoCelda != MICRO
+                && laberinto.celdas[x][y].tipoCelda != CARTA;
+
     }
 
     @Override

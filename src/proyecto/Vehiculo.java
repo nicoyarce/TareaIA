@@ -88,6 +88,7 @@ public class Vehiculo extends TimerTask implements Constantes {
         return laberinto.celdas[x][y].tipoCelda != JUGADOR
                 && laberinto.celdas[x][y].tipoCelda != PEATON
                 && laberinto.celdas[x][y].tipoCelda != VEHICULO
-                && laberinto.celdas[x][y].tipoCelda != MICRO;
+                && laberinto.celdas[x][y].tipoCelda != MICRO
+                && laberinto.celdas[x][y].tipoCelda != CARTA;
     }
 }
