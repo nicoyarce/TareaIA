@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import static proyecto.Jugador.nCartas;
+import static proyecto.Jugador.portales;
 
 public class Celda extends JComponent implements Constantes {
 
@@ -58,8 +60,8 @@ public class Celda extends JComponent implements Constantes {
                 }
                 break;
             case OBSTACULO:
-                g.setColor(COLORAMARILLO);
-                g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                //g.setColor(COLORAMARILLO);
+                //g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 g.setColor(Color.BLACK);
                 g.drawImage(obstaculo, x, y, this);
                 g.drawString(Integer.toString(npeatones), x + 10, y + 10);
@@ -79,8 +81,16 @@ public class Celda extends JComponent implements Constantes {
                 //g.drawString(Integer.toString(npeatones), x + 10, y + 10);
                 break;
             case PORTAL:
+                int n = 0;
+                for (int i = 0; i < portales.size(); i++) {
+                    if (j.portales.get(i).portal.x == x && portales.get(i).portal.y == y) {
+                        n = portales.get(i).nCartas;
+                    }
+                }
                 g.setColor(COLORAZUL);
                 g.drawOval(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
+                g.setColor(Color.BLACK);
+                g.drawString(Integer.toString(n), x + 15, y + 15);
                 break;
             case MICRO:
                 g.drawImage(micro, x, y, this);

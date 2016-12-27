@@ -6,16 +6,19 @@ import static proyecto.Constantes.N_CELDAS_ALTO;
 import static proyecto.Constantes.N_CELDAS_ANCHO;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Jugador implements Constantes {
 
     public Laberinto laberinto;
     public Celda jugador, celdaMovimiento;
     public BusquedaAnchura inteligencia;
+    public static ArrayList<Portal> portales;
     public static int nCartas;
 
-    public Jugador(Laberinto laberinto, int x, int y) {
+    public Jugador(Laberinto laberinto, int x, int y, ArrayList<Portal> portales) {
         this.laberinto = laberinto;
+        this.portales = portales;
         celdaMovimiento = new Celda(x, y, laberinto.celdas[x][y].tipoCelda);
         jugador = new Celda(x, y, JUGADOR);
         laberinto.celdas[jugador.x][jugador.y].tipoCelda = JUGADOR;
@@ -171,7 +174,22 @@ public class Jugador implements Constantes {
                 break;
             case 'U':
                 if (esPortal(jugador.x, jugador.y - 1)) {
-                    nCartas--;
+                    for (int i = 0; i < portales.size(); i++) {
+                        if (portales.get(i).portal.x == jugador.x && portales.get(i).portal.y == jugador.y - 1) {
+
+                            for (int j = 0; j < portales.get(i).nCartas; j++) {
+                                System.out.println("delet dis");
+                                if (nCartas == 0) {
+                                    nCartas = 0;
+                                    if (esPortal(jugador.x, jugador.y - 1) && celdaMovimiento.x == 5 && celdaMovimiento.y == 2) {
+                                        JOptionPane.showMessageDialog(null, "Cartero en correos");
+                                    }
+                                    break;
+                                }
+                                nCartas--;
+                            }
+                        }
+                    }
                 }
                 temp = celdaMovimiento.tipoCelda;
                 celdaMovimiento.tipoCelda = laberinto.celdas[x][y].tipoCelda;

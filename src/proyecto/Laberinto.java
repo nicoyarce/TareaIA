@@ -1,13 +1,14 @@
 package proyecto;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.ArrayList;
 import javax.swing.JComponent;
 
 public class Laberinto extends JComponent implements Constantes {
 
     public Celda[][] celdas;
     public Lienzo lienzoPadre;
-    public Jugador jugador;
 
     public Laberinto(Lienzo lienzoPadre) {
         this.lienzoPadre = lienzoPadre;
@@ -62,25 +63,6 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(9, 11, 0, 21);
         crearCalle(33, 35, 0, 23);
         crearCalle(21, 23, 0, 23);
-
-        celdas[5][2].tipoCelda = PORTAL; //correo
-        celdas[6][18].tipoCelda = PORTAL;
-        celdas[38][9].tipoCelda = PEATON;
-        celdas[13][2].tipoCelda = PORTAL;
-        celdas[16][2].tipoCelda = PORTAL;
-        celdas[25][2].tipoCelda = PORTAL;
-        celdas[28][2].tipoCelda = PORTAL;
-        celdas[15][9].tipoCelda = PORTAL;
-        celdas[25][9].tipoCelda = PORTAL;
-        celdas[28][9].tipoCelda = PORTAL;
-        celdas[15][15].tipoCelda = PORTAL;
-        celdas[18][15].tipoCelda = PORTAL;
-        celdas[27][15].tipoCelda = PORTAL;
-        celdas[30][15].tipoCelda = PORTAL;
-        celdas[13][21].tipoCelda = PORTAL;
-        celdas[16][21].tipoCelda = PORTAL;
-        celdas[28][21].tipoCelda = PORTAL;
-        celdas[38][21].tipoCelda = PORTAL;
 
         celdas[31][5].tipoCelda = PARADA;
     }

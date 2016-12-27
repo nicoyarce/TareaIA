@@ -13,11 +13,19 @@ public class Portal implements Constantes {
 
     public Laberinto laberinto;
     public Celda portal;
-    public int id;
     public int nCartas;
 
     Portal(Laberinto laberinto, int x, int y) {
         this.laberinto = laberinto;
         portal = new Celda(x, y, PORTAL);
+        laberinto.celdas[x][y].tipoCelda = PORTAL;
+        nCartas = 1;
+    }
+
+    Portal(Laberinto laberinto, int x, int y, int n) {
+        this.laberinto = laberinto;
+        portal = new Celda(x, y, PORTAL);
+        laberinto.celdas[x][y].tipoCelda = PORTAL;
+        nCartas = n;
     }
 }

@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import javax.imageio.ImageIO;
 
@@ -20,6 +21,7 @@ public class Lienzo extends Canvas implements Constantes {
     public Peaton peaton, peaton2;
     public Jugador jugador;
     public Micro micro;
+    public ArrayList<Portal> portales;
     public Timer lanzadorTareas;
     public Graphics graficoBuffer;
     public Image imagenBuffer;
@@ -50,7 +52,10 @@ public class Lienzo extends Canvas implements Constantes {
 
         micro = new Micro(laberinto, p11, p12);
 
-        jugador = new Jugador(laberinto, 10, 10);
+        portales = new ArrayList<>();
+        jugador = new Jugador(laberinto, 1, 1, portales);
+
+        crearPortales();
 
         try {
             fondo = ImageIO.read(new File("images/fondo.png"));
@@ -85,6 +90,34 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(micro, 0, 300);
         //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
+    }
+
+    private void crearPortales() {
+        crearPortal(5, 2);
+        crearPortal(6, 18);
+        crearPortal(13, 2);
+        crearPortal(16, 2);
+        crearPortal(25, 2);
+        crearPortal(28, 2);
+        crearPortal(15, 9);
+        crearPortal(25, 9);
+        crearPortal(28, 9);
+        crearPortal(15, 15);
+        crearPortal(18, 15);
+        crearPortal(27, 15);
+        crearPortal(30, 15);
+        crearPortal(13, 21);
+        crearPortal(16, 21);
+        crearPortal(28, 21);
+        crearPortal(38, 21);
+    }
+
+    private void crearPortal(int x, int y) {
+        portales.add(new Portal(laberinto, x, y));
+    }
+
+    private void crearPortal(int x, int y, int n) {
+        portales.add(new Portal(laberinto, x, y, n));
     }
 
     @Override
