@@ -73,10 +73,10 @@ public class Lienzo extends Canvas implements Constantes {
         });
 
         jugador.inteligencia.destinos.add(new Estado(13, 2, 'N', null));
-        //jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(40, 17, 'N', null));
         jugador.inteligencia.destinos.add(new Estado(13, 21, 'N', null));
-        //jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
-        //jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));
+        jugador.inteligencia.destinos.add(new Estado(28, 2, 'N', null));
+        //jugador.inteligencia.destinos.add(new Estado(5, 2, 'N', null));     //correos
 
         jugador.inteligencia.buscar(jugador.celdaMovimiento.x, jugador.celdaMovimiento.y, jugador.inteligencia.destinos.get(jugador.inteligencia.nDestinos - 1));
         jugador.inteligencia.calcularRuta();
@@ -89,11 +89,10 @@ public class Lienzo extends Canvas implements Constantes {
         lanzadorTareas.scheduleAtFixedRate(auto4, 0, 400);
         lanzadorTareas.scheduleAtFixedRate(peaton, 0, 300);
         lanzadorTareas.scheduleAtFixedRate(micro, 0, 300);
-        //lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
+        lanzadorTareas.scheduleAtFixedRate(jugador.inteligencia, 0, 300);
     }
 
     private void crearPortales() {
-        crearPortal(5, 2);
         crearPortal(6, 18);
         crearPortal(13, 2);
         crearPortal(16, 2);

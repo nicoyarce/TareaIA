@@ -173,23 +173,9 @@ public class Jugador implements Constantes {
                 laberinto.celdas[jugador.x][jugador.y].indexSprite = 0;
                 break;
             case 'U':
-                if (esPortal(jugador.x, jugador.y - 1)) {
-                    for (int i = 0; i < portales.size(); i++) {
-                        if (portales.get(i).portal.x == jugador.x && portales.get(i).portal.y == jugador.y - 1) {
-
-                            for (int j = 0; j < portales.get(i).nCartas; j++) {
-                                System.out.println("delet dis");
-                                if (nCartas == 0) {
-                                    nCartas = 0;
-                                    if (esPortal(jugador.x, jugador.y - 1) && celdaMovimiento.x == 5 && celdaMovimiento.y == 2) {
-                                        JOptionPane.showMessageDialog(null, "Cartero en correos");
-                                    }
-                                    break;
-                                }
-                                nCartas--;
-                            }
-                        }
-                    }
+                entregaCartas();
+                if (celdaMovimiento.x == 5 && celdaMovimiento.y == 2 && nCartas == 0) {
+                    JOptionPane.showMessageDialog(null, "Cartero en correos, entregas listas");
                 }
                 temp = celdaMovimiento.tipoCelda;
                 celdaMovimiento.tipoCelda = laberinto.celdas[x][y].tipoCelda;
@@ -217,5 +203,24 @@ public class Jugador implements Constantes {
         }
         laberinto.lienzoPadre.repaint();
         laberinto.lienzoPadre.validate();
+    }
+
+    private void entregaCartas() {
+        if (esPortal(jugador.x, jugador.y - 1)) {
+            for (int i = 0; i < portales.size(); i++) {
+                if (portales.get(i).portal.x == jugador.x && portales.get(i).portal.y == jugador.y - 1) {
+                    for (int j = 0; j < portales.get(i).nCartas; j++) {
+                        if (nCartas == 0) {
+                            break;
+                        }
+                        if (portales.get(i).listo == true) {
+                            break;
+                        }
+                        nCartas--;
+                        portales.get(i).listo = true;
+                    }
+                }
+            }
+        }
     }
 }

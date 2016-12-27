@@ -8,8 +8,8 @@ public interface Constantes {
     public final int TAMANIO_CELDA = 31;
     public final int N_CELDAS_ANCHO = 41;
     public final int N_CELDAS_ALTO = 23;
-    public final int SIZE_WIDTH = 16 + (TAMANIO_CELDA + 1) * N_CELDAS_ANCHO;
-    public final int SIZE_HEIGHT = 9 + (TAMANIO_CELDA + 1) * (N_CELDAS_ALTO + 1);
+    public final int SIZE_WIDTH = (TAMANIO_CELDA + 1) * N_CELDAS_ANCHO + 1;
+    public final int SIZE_HEIGHT = (TAMANIO_CELDA + 1) * N_CELDAS_ALTO + 1;
 
     //Para manejar los tipos de celdas
     public final char JUGADOR = 'J';
@@ -27,9 +27,9 @@ public interface Constantes {
 
     public final int NPEATONES = 2;
 
-    public final int NPORTALES = 2;
+    public final int NPORTALES = 4;
 
-    public final int NCARTAS = 3;
+    public final int NCARTAS = 4;
 
     public final int ALFA = 150;
     public final Color COLORGRIS = new Color(192, 192, 192, ALFA);

@@ -14,6 +14,7 @@ public class Portal implements Constantes {
     public Laberinto laberinto;
     public Celda portal;
     public int nCartas;
+    public boolean listo;
 
     Portal(Laberinto laberinto, int x, int y) {
         this.laberinto = laberinto;

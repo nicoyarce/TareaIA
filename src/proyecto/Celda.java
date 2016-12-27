@@ -22,7 +22,6 @@ public class Celda extends JComponent implements Constantes {
     //nuevos atributos para manejar imagenes
     public BufferedImage jugador, obstaculo, camino, vehiculo, portal,
             edificio, acera, carretera, peaton, micro, carta;
-    public Jugador j;
 
     //constructor, inicializa los atributos
     public Celda(int x, int y, char tipo) {
@@ -83,7 +82,7 @@ public class Celda extends JComponent implements Constantes {
             case PORTAL:
                 int n = 0;
                 for (int i = 0; i < portales.size(); i++) {
-                    if (j.portales.get(i).portal.x == x && portales.get(i).portal.y == y) {
+                    if (portales.get(i).portal.y == y && portales.get(i).portal.x == x) {
                         n = portales.get(i).nCartas;
                     }
                 }
@@ -96,7 +95,7 @@ public class Celda extends JComponent implements Constantes {
                 g.drawImage(micro, x, y, this);
                 break;
             case PARADA:
-                g.setColor(COLORGRIS);
+                g.setColor(COLORAZUL);
                 g.fillRect(x, y, TAMANIO_CELDA, TAMANIO_CELDA);
                 break;
         }

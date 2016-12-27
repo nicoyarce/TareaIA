@@ -11,6 +11,7 @@ public class Micro extends TimerTask implements Constantes {
     public Celda micro, celdaMovimiento;
     public Point p1, p2, p3, p4;
     public ArrayList<Peaton> pasajeros = new ArrayList<>();
+    public boolean listo;
 
     public Micro(Laberinto laberinto, Point xp, Point yp) {
         p1 = new Point(xp.x, xp.y);
@@ -56,11 +57,9 @@ public class Micro extends TimerTask implements Constantes {
             celdaMovimiento.y = celdaMovimiento.y + 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
             if (esParada(celdaMovimiento.x, celdaMovimiento.y + 1)) {
-                System.out.println("PASO POR PARADA");
-                if (pasajeros.size() <= 0) {
-                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                if (pasajeros.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "TODOS LOS PASAJEROS HAN SIDO DEJADOS");
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
                     pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
                     pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
                 }
@@ -76,11 +75,9 @@ public class Micro extends TimerTask implements Constantes {
             celdaMovimiento.x = celdaMovimiento.x + 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
             if (esParada(celdaMovimiento.x + 1, celdaMovimiento.y)) {
-                System.out.println("PASO POR PARADA");
-                if (pasajeros.size() <= 0) {
-                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                if (pasajeros.isEmpty()) {
+                    //JOptionPane.showMessageDialog(null, "TODOS LOS PASAJEROS HAN SIDO DEJADOS");
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
                     pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
                     pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
                 }
@@ -96,11 +93,9 @@ public class Micro extends TimerTask implements Constantes {
             celdaMovimiento.x = celdaMovimiento.x - 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
             if (esParada(celdaMovimiento.x - 1, celdaMovimiento.y)) {
-                JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
-                if (pasajeros.size() <= 0) {
-                    //System.out.println("TODOS LOS PEATONES HAN SIDO DEJADOS");
+                if (pasajeros.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "TODOS LOS PASAJEROS HAN SIDO DEJADOS");
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
                     pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
                     pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
                 }
@@ -116,11 +111,9 @@ public class Micro extends TimerTask implements Constantes {
             celdaMovimiento.y = celdaMovimiento.y - 1;
             laberinto.celdas[celdaMovimiento.x][celdaMovimiento.y].tipoCelda = MICRO;
             if (esParada(celdaMovimiento.x, celdaMovimiento.y - 1)) {
-                System.out.println("PASO POR PARADA");
-                if (pasajeros.size() <= 0) {
-                    //JOptionPane.showMessageDialog(null, "TODOS LOS PEATONES HAN SIDO DEJADOS");
+                if (pasajeros.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "TODOS LOS PASAJEROS HAN SIDO DEJADOS");
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Peaton ha sido dejado en la parada");
                     pasajeros.get(pasajeros.size() - 1).serCalleAbajo();
                     pasajeros.remove(pasajeros.get(pasajeros.size() - 1));
                 }

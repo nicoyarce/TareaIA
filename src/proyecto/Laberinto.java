@@ -20,8 +20,7 @@ public class Laberinto extends JComponent implements Constantes {
             }
         }
         //pongo unos edificios
-
-        crearEdificio(2, 8, 0, 3); //edificio0
+        crearEdificio(2, 8, 0, 3); //edificio
         crearPeatones(0, 9, 0, 4);
         crearEdificio(12, 20, 0, 3); //edificio1
         crearPeatones(11, 21, 0, 4);
@@ -45,10 +44,8 @@ public class Laberinto extends JComponent implements Constantes {
         crearPeatones(23, 33, 19, 23);
         crearEdificio(36, 41, 14, 22); //edificio rejas
         crearPeatones(35, 41, 13, 23);
-
         crearPeatones(35, 41, 0, 4);
         crearPeatones(35, 41, 6, 11);
-
         crearEdificio(37, 38, 7, 9); //estatua
         crearEdificio(40, 41, 8, 9); //carro
         crearEdificio(36, 37, 0, 2); //banca
@@ -64,6 +61,7 @@ public class Laberinto extends JComponent implements Constantes {
         crearCalle(33, 35, 0, 23);
         crearCalle(21, 23, 0, 23);
 
+        celdas[5][2].tipoCelda = CAMINO;
         celdas[31][5].tipoCelda = PARADA;
     }
 
@@ -99,7 +97,7 @@ public class Laberinto extends JComponent implements Constantes {
     }
 
     private void crearCalle(int x1, int x2, int y1, int y2) {
-        int random = numeroAleatorio(1, 100);
+        int random = numeroAleatorio(50, 100);
         for (int i = x1; i < x2; i++) {
             for (int j = y1; j < y2; j++) {
                 celdas[i][j].tipoCelda = CALLE;
